@@ -1,16 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package lab2prealpha;
 
 import Sonido.SClip;
-
-/**
- *
- * @author flavi
- */
-
 
 /*
 * Estructura de Datos II
@@ -94,12 +84,7 @@ c. El programa no debe cerrarse inesperadamente.
 * */
 
 public class Lab2PreAlpha {
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
         SClip welove = new SClip("sound/videoplayback.wav");
 
         welove.play();
