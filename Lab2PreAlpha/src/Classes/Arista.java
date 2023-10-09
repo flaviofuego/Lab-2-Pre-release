@@ -11,6 +11,7 @@ public class Arista {
         this.jugador1 = jugador1;
         this.jugador2 = jugador2;
         this.enfoque = enfoque;
+        //this.setEnfoque(enfoque);
         this.paso = false;
     }
     
@@ -50,5 +51,9 @@ public class Arista {
 
     public void setPaso(Boolean paso) {
         this.paso = paso;
+    }
+
+    public int getPeso() {
+        return peso;
     }
 }
