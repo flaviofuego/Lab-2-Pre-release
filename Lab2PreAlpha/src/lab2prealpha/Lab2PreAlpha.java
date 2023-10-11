@@ -1,7 +1,8 @@
 package lab2prealpha;
 
-import Classes.Campo;
 import Sonido.SClip;
+
+import Frames.Inicio;
 
 /*
 * Estructura de Datos II
@@ -86,23 +87,9 @@ c. El programa no debe cerrarse inesperadamente.
 public class Lab2PreAlpha {
 
     public static void main(String[] args) {
-        //SClip welove = new SClip("sound\\videoplayback.wav");
-        //welove.play();
-        Campo campo = new Campo();
-        campo.setMatrizAdyacencia(new int[][]{
-            {0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-            {1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-            {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
-            {0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0},
-            {0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0},
-            {0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0},
-            {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1},
-            {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0}
-        });
-        campo.mostrarMatrizA();
+    
+        Inicio inicio = new Inicio();
+        inicio.setVisible(true);       
     }
 
 }
