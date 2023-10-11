@@ -1,12 +1,8 @@
 package lab2prealpha;
 
 import Sonido.SClip;
-import Frames.Inicio;
-/**
- *
- * @author flavi
- */
 
+import Frames.Inicio;
 
 /*
 * Estructura de Datos II
@@ -91,15 +87,9 @@ c. El programa no debe cerrarse inesperadamente.
 public class Lab2PreAlpha {
 
     public static void main(String[] args) {
-        // TODO code application logic here
-        //SClip welove = new SClip("sound\\videoplayback.wav");
-
-        //welove.play();
-        
-        
-
+    
         Inicio inicio = new Inicio();
         inicio.setVisible(true);       
     }
-    
+
 }
