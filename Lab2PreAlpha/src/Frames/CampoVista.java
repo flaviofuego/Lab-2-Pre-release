@@ -3,12 +3,13 @@ package Frames;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import Classes.Campo;
+import Classes.evento;
 
-public class CampoVista extends javax.swing.JFrame {
+public class CampoVista extends javax.swing.JFrame implements evento {
     public Campo campo;
     
     private void cambiar_modo(JPanel p){
-        p.setSize(342, 262);
+        p.setSize(500, 262);
         modo.removeAll();
         modo.add(p, BorderLayout.CENTER);
         modo.revalidate();
@@ -19,9 +20,11 @@ public class CampoVista extends javax.swing.JFrame {
         campo = new Campo();
         initComponents();
         this.setLocationRelativeTo(null);
+        mostrar.setEnabled(false);
         Jugadores j1 = new Jugadores();
         j1.setCampo(campo);
         cambiar_modo(j1);
+        j1.setListener(this);
     }
 
     @SuppressWarnings("unchecked")
@@ -153,6 +156,19 @@ public class CampoVista extends javax.swing.JFrame {
         });
     }
 
+    @Override
+    public void onSetCampo(Jugadores j) {
+        Relaciones r = new Relaciones();
+        r.setCampo(campo);
+        r.setListener(this);
+        cambiar_modo(r);
+    }
+
+    @Override
+    public void onSetCampo(Relaciones r) {
+        mostrar.setEnabled(true);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Panel_Fondo;
     private javax.swing.JButton VOLVER1;

@@ -1,11 +1,12 @@
 package Frames;
 
 import Classes.Campo;
-import java.util.Arrays;
+import Classes.evento;
 
 public class Relaciones extends javax.swing.JPanel {
-    private String[][] matrizRelaciones;
+    private int[][] matrizRelaciones;
     private Campo campo;
+    private evento listener;
     
     public Relaciones() {
         initComponents();
@@ -18,6 +19,7 @@ public class Relaciones extends javax.swing.JPanel {
         Cargar = new javax.swing.JButton();
         contenedor = new javax.swing.JScrollPane();
         input = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
 
         Cargar.setText("Cargar");
         Cargar.addActionListener(new java.awt.event.ActionListener() {
@@ -31,6 +33,10 @@ public class Relaciones extends javax.swing.JPanel {
         input.setToolTipText("escriba en forma CSV y matriz las relaciones de adyacencia de los jugadores");
         contenedor.setViewportView(input);
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("matriz de adyacencia");
+        jLabel1.setToolTipText("");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -38,15 +44,20 @@ public class Relaciones extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(contenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Cargar))
-                .addContainerGap(41, Short.MAX_VALUE))
+                    .addComponent(Cargar)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(contenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(18, Short.MAX_VALUE)
-                .addComponent(contenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(Cargar)
                 .addGap(32, 32, 32))
@@ -57,20 +68,27 @@ public class Relaciones extends javax.swing.JPanel {
         String respuesta = input.getText();
         String[] lineas = respuesta.split("\n");
         String[] columna = lineas[0].split(",");
-        matrizRelaciones = new String[lineas.length][columna.length];
+        matrizRelaciones = new int[lineas.length][columna.length-1];
         for (int i = 0; i < lineas.length; i++) {
-            for (int j = 0; j < columna.length; j++) {
-                matrizRelaciones[i][j] = lineas[i].split(",")[j];
+            for (int j = 1; j < columna.length; j++) {
+                matrizRelaciones[i][j-1] = Integer.parseInt(lineas[i].split(",")[j]);
             }
         }
-        System.out.println(Arrays.toString(matrizRelaciones));
+        campo.setMatrizAdyacencia(matrizRelaciones);
+        if (listener != null){
+            listener.onSetCampo(this);
+        }
     }//GEN-LAST:event_CargarActionPerformed
 
     public void setCampo(Campo campo) {
         this.campo = campo;
     }
+
+    public void setListener(evento listener) {
+        this.listener = listener;
+    }
  
-    public String[][] getMatrizRelaciones() {
+    public int[][] getMatrizRelaciones() {
         return matrizRelaciones;
     }
 
@@ -78,5 +96,6 @@ public class Relaciones extends javax.swing.JPanel {
     private javax.swing.JButton Cargar;
     private javax.swing.JScrollPane contenedor;
     private javax.swing.JTextArea input;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

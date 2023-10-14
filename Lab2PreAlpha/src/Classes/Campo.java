@@ -16,7 +16,7 @@ public class Campo {
         jugadores = new ArrayList<Jugador>();
         rutaOptima = new ArrayList<Integer>();
         balonPosicion = 0;
-        matrizAdyacencia = new int[10][10];
+        //matrizAdyacencia = new int[10][10];
         //relaciones = new ArrayList<Arista>();
     }
 
@@ -42,8 +42,8 @@ public class Campo {
 
     public void setMatrizAdyacencia(int[][] matrizAdyacencia) { // recibe toda una matriz de adyacencia para crear todas las relaciones de los jugadores
         this.matrizAdyacencia = matrizAdyacencia;
-        for (int i = 0; i <= matrizAdyacencia.length; i++) {
-            for (int j = 0; j <= matrizAdyacencia.length; j++) {
+        for (int i = 0; i < matrizAdyacencia.length; i++) {
+            for (int j = 0; j < matrizAdyacencia[i].length; j++) {
                 if (matrizAdyacencia[i][j] == 1) {
                     this.addRelacion(jugadores.get(j), jugadores.get(i));
                 }

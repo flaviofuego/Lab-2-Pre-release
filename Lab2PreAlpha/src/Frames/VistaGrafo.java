@@ -22,6 +22,7 @@ public class VistaGrafo extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         inicio = new javax.swing.JTextField();
         grafo = new javax.swing.JPanel();
+        siguiente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,6 +54,8 @@ public class VistaGrafo extends javax.swing.JFrame {
             .addGap(0, 304, Short.MAX_VALUE)
         );
 
+        siguiente.setText("Siguiente");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -62,6 +65,8 @@ public class VistaGrafo extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(siguiente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(VOLVER, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
@@ -79,7 +84,8 @@ public class VistaGrafo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(VOLVER, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(VOLVER, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(siguiente))
                 .addContainerGap())
         );
 
@@ -94,7 +100,7 @@ public class VistaGrafo extends javax.swing.JFrame {
     }//GEN-LAST:event_VOLVERActionPerformed
 
     private void inicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inicioActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_inicioActionPerformed
 
     public void setCampo(Campo campo) {
@@ -138,5 +144,6 @@ public class VistaGrafo extends javax.swing.JFrame {
     private javax.swing.JPanel grafo;
     private javax.swing.JTextField inicio;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton siguiente;
     // End of variables declaration//GEN-END:variables
 }

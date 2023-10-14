@@ -87,7 +87,6 @@ c. El programa no debe cerrarse inesperadamente.
 public class Lab2PreAlpha {
 
     public static void main(String[] args) {
-    
         Inicio inicio = new Inicio();
         inicio.setVisible(true);       
     }
