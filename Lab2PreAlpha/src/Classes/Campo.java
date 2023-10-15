@@ -16,8 +16,6 @@ public class Campo {
         jugadores = new ArrayList<Jugador>();
         rutaOptima = new ArrayList<Integer>();
         balonPosicion = 0;
-        //matrizAdyacencia = new int[10][10];
-        //relaciones = new ArrayList<Arista>();
     }
 
     public void addJugador(Jugador jugador) {
@@ -92,5 +90,23 @@ public class Campo {
             }
         }
         return matriz;
+    }
+
+    public ArrayList<Jugador> getJugadores() {
+        return jugadores;
+    }
+
+    public int getBalonPosicion() {
+        return balonPosicion;
+    }
+    
+    public ArrayList<Arista> getAristas(){
+        ArrayList<Arista> aristas = new ArrayList<Arista>();
+        for (Jugador jugador: this.getJugadores()) {
+            for (Arista arista:jugador.getArista()){
+                aristas.add(arista);
+            }
+        }
+        return aristas;
     }
 }

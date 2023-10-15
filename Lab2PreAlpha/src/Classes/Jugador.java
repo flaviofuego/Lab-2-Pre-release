@@ -10,6 +10,7 @@ public class Jugador {
     private int habilidad;
     private int posesion;
     private int ID;
+    private Circulo circulo;
     private static int cd;
 
     public Jugador(String nombre, int velocidad, int remate, int posesion){
@@ -18,7 +19,12 @@ public class Jugador {
         this.habilidad = remate;
         this.posesion = posesion;
         this.aristas = new ArrayList<>();
+        circulo = null;
         this.ID = cd++;
+    }
+    
+    public Circulo getCirculo() {
+        return circulo;
     }
     
     public int getID() {

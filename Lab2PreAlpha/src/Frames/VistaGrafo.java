@@ -9,7 +9,7 @@ public class VistaGrafo extends javax.swing.JFrame {
     public VistaGrafo() {
         initComponents();
         this.setLocationRelativeTo(null);
-        grafo.add(new Gui().jPanel2);
+        grafo.add(new ver());
         grafo.revalidate();
         grafo.repaint();
     }
@@ -33,7 +33,7 @@ public class VistaGrafo extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Incio del balon");
+        jLabel1.setText("Inicio del balon");
 
         inicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
