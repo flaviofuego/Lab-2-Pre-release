@@ -23,9 +23,9 @@ public class Vertice extends javax.swing.JPanel
 
     public void dibuja(Graphics g) {
         Font fuenteV = getFont();
-        Font nuevaFuente = new Font("Monospaced", Font.BOLD, 16);
+        Font nuevaFuente = new Font("Monospaced", Font.BOLD, 12);
         g.setColor(Color.blue);
-        g.drawOval(0, 0, 30, 30);
+        g.drawOval(0, 0, 40, 40);
         g.setColor(Color.black);
         g.setFont(nuevaFuente);
         if (Vista.c == Vista.maxN) {
