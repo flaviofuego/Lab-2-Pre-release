@@ -92,6 +92,12 @@ public class Relaciones extends javax.swing.JPanel {
         return matrizRelaciones;
     }
 
+    public Campo getCampo() {
+        return campo;
+    }
+    
+    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cargar;
     private javax.swing.JScrollPane contenedor;

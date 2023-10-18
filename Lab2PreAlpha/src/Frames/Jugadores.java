@@ -94,6 +94,12 @@ public class Jugadores extends javax.swing.JPanel {
         this.listener = listener;
     }
 
+    public Campo getCampo() {
+        return campo;
+    }
+    
+    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cargar;
     private javax.swing.JScrollPane contenedor;

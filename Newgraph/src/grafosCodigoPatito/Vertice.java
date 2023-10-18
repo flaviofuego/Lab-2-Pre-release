@@ -13,12 +13,35 @@ public class Vertice extends javax.swing.JPanel
         implements MouseListener, MouseMotionListener {
 
     private int pos = -1;
+    private Arista arista;
+    private int x, y;
 
     public Vertice() {
+        this.arista = null;
+        this.x = 0;
+        this.y = 0;
         initComponents();
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
         setVisible(true);
+    }
+    public void setArista(Arista arista) {
+        this.arista = arista;
+    }
+    public Arista getArista() {
+        return this.arista;
+    }
+    public void setX(int x) {
+        this.x = x;
+    }
+    public int getX() {
+        return this.x;
+    }
+    public void setY(int y) {
+        this.y = y;
+    }
+    public int getY() {
+        return this.y;
     }
 
     public void dibuja(Graphics g) {

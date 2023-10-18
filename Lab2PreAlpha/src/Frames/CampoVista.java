@@ -7,6 +7,8 @@ import Classes.evento;
 
 public class CampoVista extends javax.swing.JFrame implements evento {
     public Campo campo;
+    Jugadores j1;
+    Relaciones r;
     
     private void cambiar_modo(JPanel p){
         p.setSize(500, 262);
@@ -21,7 +23,7 @@ public class CampoVista extends javax.swing.JFrame implements evento {
         initComponents();
         this.setLocationRelativeTo(null);
         mostrar.setEnabled(false);
-        Jugadores j1 = new Jugadores();
+        j1 = new Jugadores();
         j1.setCampo(campo);
         cambiar_modo(j1);
         j1.setListener(this);
@@ -113,8 +115,9 @@ public class CampoVista extends javax.swing.JFrame implements evento {
     private void mostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarActionPerformed
         // TODO add your handling code here:
         VistaGrafo v = new VistaGrafo();
+        
+        v.setCampo(r.getCampo());
         this.setVisible(false);
-        v.setCampo(campo);
         v.setVisible(true);
     }//GEN-LAST:event_mostrarActionPerformed
 
@@ -158,8 +161,9 @@ public class CampoVista extends javax.swing.JFrame implements evento {
 
     @Override
     public void onSetCampo(Jugadores j) {
-        Relaciones r = new Relaciones();
-        r.setCampo(campo);
+        r = new Relaciones();
+        System.out.println(j1.getCampo().getJugadores().size());
+        r.setCampo(j1.getCampo());
         r.setListener(this);
         cambiar_modo(r);
     }
