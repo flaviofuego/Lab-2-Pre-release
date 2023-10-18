@@ -5,8 +5,17 @@ public class Arista {
     private Vertice origen;
     private Vertice destino;
 
-    public Arista() {
-        this.origen = null;
-        this.destino = null;
+    public Arista(Vertice origen, Vertice destino) {
+        this.origen = origen;
+        this.destino = destino;
+        this.peso = 0;
+    }
+
+    public Vertice getOrigen() {
+        return origen;
+    }
+
+    public Vertice getDestino() {
+        return destino;
     }
 }

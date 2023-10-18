@@ -15,11 +15,24 @@ public class Vertice extends javax.swing.JPanel
     private int pos = -1;
     private Arista arista;
     private int x, y;
+    private String nombre;
 
     public Vertice() {
         this.arista = null;
         this.x = 0;
         this.y = 0;
+        this.nombre = "";
+        initComponents();
+        this.addMouseListener(this);
+        this.addMouseMotionListener(this);
+        setVisible(true);
+    }
+
+    public Vertice(String nombre) {
+        this.arista = null;
+        this.x = 0;
+        this.y = 0;
+        this.nombre = nombre;
         initComponents();
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
@@ -134,5 +147,12 @@ public class Vertice extends javax.swing.JPanel
     @Override
     public void mouseMoved(MouseEvent e) {
         //throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public String getNombre() {
+        return this.nombre;
+    }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }
