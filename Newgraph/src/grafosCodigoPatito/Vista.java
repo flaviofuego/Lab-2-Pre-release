@@ -363,7 +363,7 @@ public class Vista extends javax.swing.JFrame {
                 linea1y = linea1y + 100;
             }
 
-            int linea2x = 200;
+            int linea2x = 350;
             int linea2y = 200;
             for (int i = 0; i < 3; i++) {
 
@@ -416,7 +416,7 @@ public class Vista extends javax.swing.JFrame {
                 linea2y = linea2y + 100;
             }
 
-            int linea3x = 300;
+            int linea3x = 600;
             int linea3y = 175;
             for (int i = 0; i < 3; i++) {
                 Vertice prueba = new Vertice();
@@ -426,7 +426,7 @@ public class Vista extends javax.swing.JFrame {
                 panelView.add(prueba);
                 panel.add(prueba);
                 prueba.dibuja(prueba.getGraphics());
-                linea2x = 218;
+                linea2x = 368;
                 linea2y = 220;
                 switch (linea3y) {
                     case 175:
@@ -465,7 +465,7 @@ public class Vista extends javax.swing.JFrame {
             //////////////////////////////////////////////////
            
             //Jugadores Equipo 2
-
+               /*
             Vertice ko2 = new Vertice();
 
             ko2.setBounds(655, 300, 41, 41);
@@ -479,8 +479,7 @@ public class Vista extends javax.swing.JFrame {
 
             for (int i = 0; i < 4; i++) {
                 Vertice prueba = new Vertice();
-                /*int x = (int) (Math.random() * 400);
-                int y = (int) (Math.random() * 400);*/
+                
                 prueba.setBounds(linea4x, linea4y, 41, 41);
                 panelView.add(prueba);
                 panel.add(prueba);
@@ -516,8 +515,7 @@ public class Vista extends javax.swing.JFrame {
             for (int i = 0; i < 3; i++) {
 
                 Vertice prueba = new Vertice();
-                /*int x = (int) (Math.random() * 400);
-                int y = (int) (Math.random() * 400);*/
+                /
                 prueba.setBounds(linea5x, linea5y, 41, 41);
                 panelView.add(prueba);
                 panel.add(prueba);
@@ -525,11 +523,7 @@ public class Vista extends javax.swing.JFrame {
 
                 linea4x = 573;
                 linea4y = 170;
-                /*for (int h = 0; h < 4; h++) {
-                    Vista.linea(linea1x, linea1y,
-                            linea2x, linea2y);
-                    linea1y = linea1y + 100;
-                }*/
+                
                 switch (linea5y) {
                     case 200:
                         Vista.linea(linea4x, linea4y,
@@ -541,10 +535,7 @@ public class Vista extends javax.swing.JFrame {
 
                         break;
                     case 300:
-                        /*Vista.linea(linea1x, linea1y + 100,
-                                linea2x+18, linea2y+20);
-                        Vista.linea(linea1x, linea1y + 200,
-                                linea2x+18, linea2y+20);*/
+                        /
                         Vista.linea(linea5x+18, linea5y+20 + 100,
                                 linea5x+18, linea5y+20);
                         break;
@@ -568,8 +559,7 @@ public class Vista extends javax.swing.JFrame {
             int linea6y = 175;
             for (int i = 0; i < 3; i++) {
                 Vertice prueba = new Vertice();
-                /*int x = (int) (Math.random() * 400);
-                int y = (int) (Math.random() * 400);*/
+                
                 prueba.setBounds(linea6x, linea6y, 41, 41);
                 panelView.add(prueba);
                 panel.add(prueba);
@@ -582,8 +572,7 @@ public class Vista extends javax.swing.JFrame {
                                 linea6x+18, linea6y+20);
                         Vista.linea(linea5x, linea5y,
                                 linea6x+18, linea6y+20);
-                        /*Vista.linea(linea2x, linea2y + 100,
-                                linea3x+18, linea3y+20);*/
+                        
                         Vista.linea(linea6x+18, linea6y+20 + 125,
                                 linea6x+18, linea6y+20);
 
@@ -591,8 +580,7 @@ public class Vista extends javax.swing.JFrame {
                     case 300:
                         Vista.linea(linea5x, linea5y + 100,
                                 linea6x+18, linea6y+20);
-                        /*Vista.linea(linea1x, linea1y + 300,
-                                linea3x+18, linea3y+20);*/
+                        
                         Vista.linea(linea6x+18, linea6y+20 + 125,
                                 linea6x+18, linea6y+20);
                         break;
@@ -610,8 +598,8 @@ public class Vista extends javax.swing.JFrame {
 
                 linea6y = linea6y + 125;
             }
+            *//////////////////////////////////////////
             
-            //////////////////////////////////////////////////
 
 
         }
