@@ -5,6 +5,9 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.lang.Math;
+import java.util.Objects;
+
+import java.util.Scanner;
 //import java.lang.runtime.SwitchBootstraps;
 
 /**
@@ -15,6 +18,29 @@ public class Vista extends javax.swing.JFrame {
 
     public static ArrayList<Vertice> panel = new ArrayList<>();
     public static ArrayList<Arista> panelA = new ArrayList<>();
+    public static  String [][] matrizAdyacencia = new String[11][12];
+    static Scanner sc = new Scanner(System.in);
+    //rellena la matriz de adyacencia, en la primera columna va "Jugador"+i y el resto con 1 aleatorios
+    
+    //imprime la matriz de adyacencia
+
+    public static String [][] texto_matriz(){
+        String respuesta = sc.hasNext() ? sc.nextLine() : "";
+        System.out.println(respuesta);
+        String[] lineas = respuesta.split("\n");
+        int columna = 12;
+        String [][] matrizRelaciones = new String[11][columna];
+        for (int i = 0; i < lineas.length; i++) {
+            for (int j = 0; j < columna; j++) {
+                matrizRelaciones[i][j] = lineas[i].split(",")[j];
+            }
+        }
+        return matrizRelaciones;
+
+    }
+
+
+
     public static int c = 0;
     public static int cl = 0;
     public static int maxN = 11;
@@ -67,10 +93,10 @@ public class Vista extends javax.swing.JFrame {
         }
     }
 
-    public static void linea(int x, int y, int w, int z) {
+    public static void linea(int x, int y, int w, int z, int peso) {
         h.setColor(Color.GRAY);
         if (x == w && y == z) {
-            h.drawArc(x + 10, y + 5, 20, 30, 320, 290);
+            h.drawArc(x +18+ 10, y + 5+20, 20, 30, 320, 290);
             x = x + 15;
             y = y + 20;
         } else {
@@ -78,8 +104,10 @@ public class Vista extends javax.swing.JFrame {
             x = ((x + 20 - w + 20) / 2) + w;
             y = ((y + 45 - z + 45) / 2) + z;
         }
+        Arista aristad = new Arista(buscaVertice(x, y), buscaVertice(w, z));
+        panelA.add(aristad);
         h.setColor(Color.BLACK);
-        h.drawString(nombreL.get(cl), x, y);
+        h.drawString(""+peso, x, y);
 //        h.drawString(nombreL.get(cl), ((x + 20 - w + 20) / 2) + w, ((y + 45 - z + 45) / 2) + z);
         if (cl == 20) {
             cl = 0;
@@ -326,292 +354,24 @@ public class Vista extends javax.swing.JFrame {
             lblEstado.setText("Vertice Activo");
 //////////////////////////////////////////////////////////////////////
         }
-        Vista.linea(347, -10,
-                                347, 580);
+
         Vista.formacion433pro();
+        matriz_arista(texto_matriz());
+        for (Arista a : panelA) {
+            System.out.println("Arista");
+            if   (a.getOrigen() == null && a.getDestino() == null) {
+                panelA.remove(a);
+                System.out.println("Arista removida");
+            }
+            if (a.getOrigen() != null && a.getDestino() != null) {
+                System.out.println(a.getOrigen().getNombre()+"->"+a.getDestino().getNombre());
+            }
+            //si la arista no tiene origen ni destino sacarla de la lista
+
+
+        }
     }//GEN-LAST:event_btnVerticeActionPerformed
-    public static void formacion433(){
 
-        //Jugadores Equipo 1
-        Vertice ko = new Vertice();
-        ko.setBounds(10, 300, 41, 41);
-        panelView.add(ko);
-        panel.add(ko);
-        ko.dibuja(ko.getGraphics());
-
-        int linea1x = 100;
-        int linea1y = 150;
-        for (int i = 0; i < 4; i++) {
-            Vertice prueba = new Vertice();
-                /*int x = (int) (Math.random() * 400);
-                int y = (int) (Math.random() * 400);*/
-            prueba.setBounds(linea1x, linea1y, 41, 41);
-            panelView.add(prueba);
-            panel.add(prueba);
-            prueba.dibuja(prueba.getGraphics());
-            Vista.linea(28, 320,
-                    linea1x+18, linea1y+20);
-
-            switch (linea1y) {
-                case 150:
-                    Vista.linea(linea1x+18, linea1y+20,
-                            linea1x+18, linea1y+20 + 100);
-
-                    break;
-                case 250:
-                    Vista.linea(linea1x+18, linea1y+20,
-                            linea1x+18, linea1y+20 + 100);
-                    break;
-
-                case 350:
-                    Vista.linea(linea1x+18, linea1y+20,
-                            linea1x+18, linea1y+20 + 100);
-                    break;
-
-
-            }
-
-            linea1y = linea1y + 100;
-        }
-
-        int linea2x = 350;
-        int linea2y = 200;
-        for (int i = 0; i < 3; i++) {
-
-            Vertice prueba = new Vertice();
-                /*int x = (int) (Math.random() * 400);
-                int y = (int) (Math.random() * 400);*/
-            prueba.setBounds(linea2x, linea2y, 41, 41);
-            panelView.add(prueba);
-            panel.add(prueba);
-            prueba.dibuja(prueba.getGraphics());
-
-            linea1x = 118;
-            linea1y = 170;
-                /*for (int h = 0; h < 4; h++) {
-                    Vista.linea(linea1x, linea1y,
-                            linea2x, linea2y);
-                    linea1y = linea1y + 100;
-                }*/
-            switch (linea2y) {
-                case 200:
-                    Vista.linea(linea1x, linea1y,
-                            linea2x+18, linea2y+20);
-                    Vista.linea(linea1x, linea1y + 100,
-                            linea2x+18, linea2y+20);
-                    Vista.linea(linea2x+18, linea2y+20 + 100,
-                            linea2x+18, linea2y+20);
-
-                    break;
-                case 300:
-                        /*Vista.linea(linea1x, linea1y + 100,
-                                linea2x+18, linea2y+20);
-                        Vista.linea(linea1x, linea1y + 200,
-                                linea2x+18, linea2y+20);*/
-                    Vista.linea(linea2x+18, linea2y+20 + 100,
-                            linea2x+18, linea2y+20);
-                    break;
-
-                case 400:
-                    Vista.linea(linea1x, linea1y + 200,
-                            linea2x+18, linea2y+20);
-                    Vista.linea(linea1x, linea1y + 300,
-                            linea2x+18, linea2y+20);
-
-                    break;
-
-
-            }
-
-            linea2y = linea2y + 100;
-        }
-
-        int linea3x = 600;
-        int linea3y = 175;
-        for (int i = 0; i < 3; i++) {
-            Vertice prueba = new Vertice();
-                /*int x = (int) (Math.random() * 400);
-                int y = (int) (Math.random() * 400);*/
-            prueba.setBounds(linea3x, linea3y, 41, 41);
-            panelView.add(prueba);
-            panel.add(prueba);
-            prueba.dibuja(prueba.getGraphics());
-            linea2x = 368;
-            linea2y = 220;
-            switch (linea3y) {
-                case 175:
-                    Vista.linea(linea1x, linea1y,
-                            linea3x+18, linea3y+20);
-                    Vista.linea(linea2x, linea2y,
-                            linea3x+18, linea3y+20);
-                        /*Vista.linea(linea2x, linea2y + 100,
-                                linea3x+18, linea3y+20);*/
-                    Vista.linea(linea3x+18, linea3y+20 + 125,
-                            linea3x+18, linea3y+20);
-
-                    break;
-                case 300:
-                    Vista.linea(linea2x, linea2y + 100,
-                            linea3x+18, linea3y+20);
-                        /*Vista.linea(linea1x, linea1y + 300,
-                                linea3x+18, linea3y+20);*/
-                    Vista.linea(linea3x+18, linea3y+20 + 125,
-                            linea3x+18, linea3y+20);
-                    break;
-
-                case 425:
-                    Vista.linea(linea1x, linea1y + 300,
-                            linea3x+18, linea3y+20);
-                    Vista.linea(linea2x, linea2y + 200,
-                            linea3x+18, linea3y+20);
-                    break;
-
-
-            }
-
-            linea3y = linea3y + 125;
-        }
-        //////////////////////////////////////////////////
-
-        //Jugadores Equipo 2
-               /*
-            Vertice ko2 = new Vertice();
-
-            ko2.setBounds(655, 300, 41, 41);
-
-            panelView.add(ko2);
-            panel.add(ko2);
-            ko2.dibuja(ko2.getGraphics());
-
-            int linea4x = 555;
-            int linea4y = 150;
-
-            for (int i = 0; i < 4; i++) {
-                Vertice prueba = new Vertice();
-
-                prueba.setBounds(linea4x, linea4y, 41, 41);
-                panelView.add(prueba);
-                panel.add(prueba);
-                prueba.dibuja(prueba.getGraphics());
-                Vista.linea(670, 320,
-                        linea4x+18, linea4y+20);
-
-                switch (linea4y) {
-                    case 150:
-                        Vista.linea(linea4x+18, linea4y+20,
-                                linea4x+18, linea4y+20 + 100);
-
-                        break;
-                    case 250:
-                        Vista.linea(linea4x+18, linea4y+20,
-                                linea4x+18, linea4y+20 + 100);
-                        break;
-
-                    case 350:
-                        Vista.linea(linea4x+18, linea4y+20,
-                                linea4x+18, linea4y+20 + 100);
-                        break;
-
-                    default:
-                        System.out.println(":v");
-                }
-
-                linea4y = linea4y + 100;
-            }
-
-            int linea5x = 455;
-            int linea5y = 200;
-            for (int i = 0; i < 3; i++) {
-
-                Vertice prueba = new Vertice();
-                /
-                prueba.setBounds(linea5x, linea5y, 41, 41);
-                panelView.add(prueba);
-                panel.add(prueba);
-                prueba.dibuja(prueba.getGraphics());
-
-                linea4x = 573;
-                linea4y = 170;
-
-                switch (linea5y) {
-                    case 200:
-                        Vista.linea(linea4x, linea4y,
-                                linea5x+18, linea5y+20);
-                        Vista.linea(linea4x, linea4y + 100,
-                                linea5x+18, linea5y+20);
-                        Vista.linea(linea5x+18, linea5y+20 + 100,
-                                linea5x+18, linea5y+20);
-
-                        break;
-                    case 300:
-                        /
-                        Vista.linea(linea5x+18, linea5y+20 + 100,
-                                linea5x+18, linea5y+20);
-                        break;
-
-                    case 400:
-                        Vista.linea(linea4x, linea4y + 200,
-                                linea5x+18, linea5y+20);
-                        Vista.linea(linea4x, linea4y + 300,
-                                linea5x+18, linea5y+20);
-
-                        break;
-
-                    default:
-                        System.out.println(":v");
-                }
-
-                linea5y = linea5y + 100;
-            }
-
-            int linea6x = 355;
-            int linea6y = 175;
-            for (int i = 0; i < 3; i++) {
-                Vertice prueba = new Vertice();
-
-                prueba.setBounds(linea6x, linea6y, 41, 41);
-                panelView.add(prueba);
-                panel.add(prueba);
-                prueba.dibuja(prueba.getGraphics());
-                linea5x = 473;
-                linea5y = 220;
-                switch (linea6y) {
-                    case 175:
-                        Vista.linea(linea4x, linea4y,
-                                linea6x+18, linea6y+20);
-                        Vista.linea(linea5x, linea5y,
-                                linea6x+18, linea6y+20);
-
-                        Vista.linea(linea6x+18, linea6y+20 + 125,
-                                linea6x+18, linea6y+20);
-
-                        break;
-                    case 300:
-                        Vista.linea(linea5x, linea5y + 100,
-                                linea6x+18, linea6y+20);
-
-                        Vista.linea(linea6x+18, linea6y+20 + 125,
-                                linea6x+18, linea6y+20);
-                        break;
-
-                    case 425:
-                        Vista.linea(linea4x, linea4y + 300,
-                                linea6x+18, linea6y+20);
-                        Vista.linea(linea5x, linea5y + 200,
-                                linea6x+18, linea6y+20);
-                        break;
-
-                    default:
-                        System.out.println(":v");
-                }
-
-                linea6y = linea6y + 125;
-            }
-            *//////////////////////////////////////////
-
-
-
-    }
     //crea una funcion que busca el vertice en el panel en base a las coordenadas
     public static Vertice buscaVertice(int x, int y) {
         Vertice v = null;
@@ -625,7 +385,7 @@ public class Vista extends javax.swing.JFrame {
     public static void formacion433pro(){
         int cont = 1;
         //Jugadores Equipo 1
-        Vertice ko = new Vertice("Jugador "+cont);
+        Vertice ko = new Vertice("Jugador"+cont);
         ko.setX(10);
         ko.setY(300);
         ko.setBounds(ko.getX(),ko.getY(), 41, 41);
@@ -637,7 +397,7 @@ public class Vista extends javax.swing.JFrame {
         int linea1x = 100;
         int linea1y = 150;
         for (int i = 0; i < 4; i++) {
-            Vertice prueba = new Vertice("Jugador "+cont);
+            Vertice prueba = new Vertice("Jugador"+cont);
             prueba.setX(linea1x);
             prueba.setY(linea1y);
             prueba.setBounds(prueba.getX(),prueba.getY(), 41, 41);
@@ -646,33 +406,6 @@ public class Vista extends javax.swing.JFrame {
             prueba.dibuja(prueba.getGraphics());
             cont++;
 
-            Vista.linea(28, 320,
-                    linea1x+18, linea1y+20);
-            System.out.println("nom "+buscaVertice(linea1x, linea1y).getNombre());
-            System.out.println("nom "+buscaVertice(10, 300).getNombre());
-           Arista arista = new Arista(buscaVertice(10, 300), buscaVertice(linea1x, linea1y));
-            panelA.add(arista);
-
-            switch (linea1y) {
-                case 150:
-                    Vista.linea(linea1x+18, linea1y+20,
-                            linea1x+18, linea1y+20 + 100);
-                    
-                    break;
-                case 250:
-                    Vista.linea(linea1x+18, linea1y+20,
-                            linea1x+18, linea1y+20 + 100);
-
-                    break;
-
-                case 350:
-                    Vista.linea(linea1x+18, linea1y+20,
-                            linea1x+18, linea1y+20 + 100);
-
-                    break;
-
-
-            }
 
             linea1y = linea1y + 100;
         }
@@ -681,17 +414,13 @@ public class Vista extends javax.swing.JFrame {
         int ddd = 100;
         int  xxx = 150;
         //crea una arista entre los vertices de la linea 1
-        for (int j = 0; j < 3; j++) {
-            Arista aristad = new Arista(buscaVertice(ddd, xxx), buscaVertice(ddd, xxx+100));
-            xxx = xxx + 100;
-            panelA.add(aristad);
-        }
+
 
         int linea2x = 350;
         int linea2y = 200;
         for (int i = 0; i < 3; i++) {
 
-            Vertice prueba = new Vertice("Jugador "+cont);
+            Vertice prueba = new Vertice("Jugador"+cont);
             prueba.setX(linea2x);
             prueba.setY(linea2y);
             prueba.setBounds(prueba.getX(), prueba.getY(), 41, 41);
@@ -702,40 +431,22 @@ public class Vista extends javax.swing.JFrame {
             linea1x = 118;
             linea1y = 170;
 
-            switch (linea2y) {
-                case 200:
-                    Vista.linea(linea1x, linea1y,
-                            linea2x+18, linea2y+20);
-                    Vista.linea(linea1x, linea1y + 100,
-                            linea2x+18, linea2y+20);
-                    Vista.linea(linea2x+18, linea2y+20 + 100,
-                            linea2x+18, linea2y+20);
-
-                    break;
-                case 300:
-
-                    Vista.linea(linea2x+18, linea2y+20 + 100,
-                            linea2x+18, linea2y+20);
-                    break;
-
-                case 400:
-                    Vista.linea(linea1x, linea1y + 200,
-                            linea2x+18, linea2y+20);
-                    Vista.linea(linea1x, linea1y + 300,
-                            linea2x+18, linea2y+20);
-
-                    break;
-
-
-            }
 
             linea2y = linea2y + 100;
+
         }
+        ddd = 100;
+        xxx = 150;
+
+         ddd = 350;
+         xxx = 200;
+        //crea una arista entre los vertices de la linea 1
+
 
         int linea3x = 600;
         int linea3y = 175;
         for (int i = 0; i < 3; i++) {
-            Vertice prueba = new Vertice("Jugador "+cont);
+            Vertice prueba = new Vertice("Jugador"+cont);
             prueba.setX(linea3x);
             prueba.setY(linea3y);
             prueba.setBounds(linea3x, linea3y, 41, 41);
@@ -745,196 +456,51 @@ public class Vista extends javax.swing.JFrame {
             cont++;
             linea2x = 368;
             linea2y = 220;
-            switch (linea3y) {
-                case 175:
-                    Vista.linea(linea1x, linea1y,
-                            linea3x+18, linea3y+20);
-                    Vista.linea(linea2x, linea2y,
-                            linea3x+18, linea3y+20);
-
-                    Vista.linea(linea3x+18, linea3y+20 + 125,
-                            linea3x+18, linea3y+20);
-
-                    break;
-                case 300:
-                    Vista.linea(linea2x, linea2y + 100,
-                            linea3x+18, linea3y+20);
-
-                    Vista.linea(linea3x+18, linea3y+20 + 125,
-                            linea3x+18, linea3y+20);
-                    break;
-
-                case 425:
-                    Vista.linea(linea1x, linea1y + 300,
-                            linea3x+18, linea3y+20);
-                    Vista.linea(linea2x, linea2y + 200,
-                            linea3x+18, linea3y+20);
-                    break;
-
-
-            }
 
             linea3y = linea3y + 125;
         }
+        ddd = 600;
+        xxx = 175;
+        //crea una arista entre los vertices de la linea 1
+
         //////////////////////////////////////////////////
 
-        //Jugadores Equipo 2
-               /*
-            Vertice ko2 = new Vertice();
 
-            ko2.setBounds(655, 300, 41, 41);
-
-            panelView.add(ko2);
-            panel.add(ko2);
-            ko2.dibuja(ko2.getGraphics());
-
-            int linea4x = 555;
-            int linea4y = 150;
-
-            for (int i = 0; i < 4; i++) {
-                Vertice prueba = new Vertice();
-
-                prueba.setBounds(linea4x, linea4y, 41, 41);
-                panelView.add(prueba);
-                panel.add(prueba);
-                prueba.dibuja(prueba.getGraphics());
-                Vista.linea(670, 320,
-                        linea4x+18, linea4y+20);
-
-                switch (linea4y) {
-                    case 150:
-                        Vista.linea(linea4x+18, linea4y+20,
-                                linea4x+18, linea4y+20 + 100);
-
-                        break;
-                    case 250:
-                        Vista.linea(linea4x+18, linea4y+20,
-                                linea4x+18, linea4y+20 + 100);
-                        break;
-
-                    case 350:
-                        Vista.linea(linea4x+18, linea4y+20,
-                                linea4x+18, linea4y+20 + 100);
-                        break;
-
-                    default:
-                        System.out.println(":v");
-                }
-
-                linea4y = linea4y + 100;
-            }
-
-            int linea5x = 455;
-            int linea5y = 200;
-            for (int i = 0; i < 3; i++) {
-
-                Vertice prueba = new Vertice();
-                /
-                prueba.setBounds(linea5x, linea5y, 41, 41);
-                panelView.add(prueba);
-                panel.add(prueba);
-                prueba.dibuja(prueba.getGraphics());
-
-                linea4x = 573;
-                linea4y = 170;
-
-                switch (linea5y) {
-                    case 200:
-                        Vista.linea(linea4x, linea4y,
-                                linea5x+18, linea5y+20);
-                        Vista.linea(linea4x, linea4y + 100,
-                                linea5x+18, linea5y+20);
-                        Vista.linea(linea5x+18, linea5y+20 + 100,
-                                linea5x+18, linea5y+20);
-
-                        break;
-                    case 300:
-                        /
-                        Vista.linea(linea5x+18, linea5y+20 + 100,
-                                linea5x+18, linea5y+20);
-                        break;
-
-                    case 400:
-                        Vista.linea(linea4x, linea4y + 200,
-                                linea5x+18, linea5y+20);
-                        Vista.linea(linea4x, linea4y + 300,
-                                linea5x+18, linea5y+20);
-
-                        break;
-
-                    default:
-                        System.out.println(":v");
-                }
-
-                linea5y = linea5y + 100;
-            }
-
-            int linea6x = 355;
-            int linea6y = 175;
-            for (int i = 0; i < 3; i++) {
-                Vertice prueba = new Vertice();
-
-                prueba.setBounds(linea6x, linea6y, 41, 41);
-                panelView.add(prueba);
-                panel.add(prueba);
-                prueba.dibuja(prueba.getGraphics());
-                linea5x = 473;
-                linea5y = 220;
-                switch (linea6y) {
-                    case 175:
-                        Vista.linea(linea4x, linea4y,
-                                linea6x+18, linea6y+20);
-                        Vista.linea(linea5x, linea5y,
-                                linea6x+18, linea6y+20);
-
-                        Vista.linea(linea6x+18, linea6y+20 + 125,
-                                linea6x+18, linea6y+20);
-
-                        break;
-                    case 300:
-                        Vista.linea(linea5x, linea5y + 100,
-                                linea6x+18, linea6y+20);
-
-                        Vista.linea(linea6x+18, linea6y+20 + 125,
-                                linea6x+18, linea6y+20);
-                        break;
-
-                    case 425:
-                        Vista.linea(linea4x, linea4y + 300,
-                                linea6x+18, linea6y+20);
-                        Vista.linea(linea5x, linea5y + 200,
-                                linea6x+18, linea6y+20);
-                        break;
-
-                    default:
-                        System.out.println(":v");
-                }
-
-                linea6y = linea6y + 125;
-            }
-            *//////////////////////////////////////////
         for (Vertice v : panel) {
             System.out.println(v.getNombre());
             System.out.println("X:"+v.getX()+" Y:" +v.getY());
         }
-        for (Arista a : panelA) {
 
-            System.out.println("Arista");
-            if   (a.getOrigen() == null && a.getDestino() == null) {
-                panelA.remove(a);
-                System.out.println("Arista removida");
+    }
+    //crea una funcion que busque un vertice en base a su nombre
+    public static Vertice buscaVertice(String nombre) {
+        Vertice v = null;
+        for (int i = 0; i < panel.size(); i++) {
+            if (panel.get(i).getNombre().equals(nombre)) {
+                v = panel.get(i);
             }
-            if (a.getOrigen() != null && a.getDestino() != null) {
-                System.out.println(a.getOrigen().getNombre()+"->"+a.getDestino().getNombre());
+        }
+        return v;
+    }
+
+    public static  void matriz_arista(String [][] matrizAdyacencia){
+        int cont = 1;
+        for (int i = 0; i < matrizAdyacencia.length; i++) {
+            for (int j = 0; j < matrizAdyacencia.length; j++) {
+                //buscara en la matriz de adyacencia los 1 y creara una arista
+                //se usa el nombre de la posicion (0,j) para encontrar el vertice de origen
+                //se usa busca el vertice de destino con la funcion buscaVertice ingresando "Jugador"+j
+                if (Objects.equals(matrizAdyacencia[i][j], "1")) {
+                    linea(buscaVertice(matrizAdyacencia[i][0]).getX(), buscaVertice(matrizAdyacencia[i][0]).getY(),
+                            buscaVertice("Jugador"+j).getX(), buscaVertice("Jugador"+j).getY(),0);
+
+                }
             }
-            //si la arista no tiene origen ni destino sacarla de la lista
-
-
         }
 
 
-
     }
+
     private void btnLineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLineaActionPerformed
         if (L) {
             L = false;

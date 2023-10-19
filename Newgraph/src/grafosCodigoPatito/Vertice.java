@@ -104,7 +104,7 @@ public class Vertice extends javax.swing.JPanel
                 Vista.eligioP = false;
                 Vista.i = this.pos;
             } else {
-                p = this.getLocation();
+                /*p = this.getLocation();
                 Vista.x2 = p.x;
                 Vista.y2 = p.y;
                 Vista.linea(Vista.x1, Vista.y1,
@@ -114,7 +114,7 @@ public class Vertice extends javax.swing.JPanel
                 Vista.MAdyacencia[Vista.i][Vista.j] = true;
                 Vista.MAdyacencia[Vista.j][Vista.i] = true;
                 Vista.MIncidencia[Vista.i][Vista.j] = true;
-                Vista.MIncidencia[Vista.j][Vista.i] = true;
+                Vista.MIncidencia[Vista.j][Vista.i] = true;*/
             }
         }
     }

@@ -65,15 +65,15 @@ public class Relaciones extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarActionPerformed
-        String respuesta = input.getText();
-        String[] lineas = respuesta.split("\n");
-        String[] columna = lineas[0].split(",");
-        matrizRelaciones = new int[lineas.length][columna.length-1];
-        for (int i = 0; i < lineas.length; i++) {
-            for (int j = 1; j < columna.length; j++) {
-                matrizRelaciones[i][j-1] = Integer.parseInt(lineas[i].split(",")[j]);
+            String respuesta = input.getText();
+            String[] lineas = respuesta.split("\n");
+            String[] columna = lineas[0].split(",");
+            matrizRelaciones = new int[lineas.length][columna.length-1];
+            for (int i = 0; i < lineas.length; i++) {
+                for (int j = 1; j < columna.length; j++) {
+                    matrizRelaciones[i][j-1] = Integer.parseInt(lineas[i].split(",")[j]);
+                }
             }
-        }
         campo.setMatrizAdyacencia(matrizRelaciones);
         if (listener != null){
             listener.onSetCampo(this);
