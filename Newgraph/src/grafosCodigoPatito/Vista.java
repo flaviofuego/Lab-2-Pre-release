@@ -62,7 +62,7 @@ public class Vista extends javax.swing.JFrame {
     public static int i = -1, j = -1;
     public static boolean MAdyacencia[][] = new boolean[maxN][maxN];
     public static boolean MIncidencia[][] = new boolean[maxN][maxL];
-    private String matrizAdyacente = "", matrizIncedencia = "";
+
 
     public Vista() {
         initComponents();
@@ -93,13 +93,15 @@ public class Vista extends javax.swing.JFrame {
         y1 = y;
         h.setColor(Color.GRAY);
         if (x == w && y == z) {
-            h.drawArc(x + 10, y + 5, 20, 30, 320, 290);
-            x = x + 15;
-            y = y + 20;
+                h.drawArc(x + 10, y + 5, 20, 30, 320, 290);
+                x = x + 15;
+                y = y + 20;
         } else {
-            h.drawLine(x + 18 + 20, y + 20 + 45, w + 20 + 18, z + 45 + 20);
-            x = ((x + 20 - w + 20) / 2) + w;
-            y = ((y + 45 - z + 45) / 2) + z;
+                h.drawLine(x + 18 + 20, y + 20 + 45, w + 20 + 18, z + 45 + 20);
+                x = ((x + 20 - w + 20) / 2) + w;
+                y = ((y + 45 - z + 45) / 2) + z;
+
+
         }
         Arista aristad = new Arista(buscaVertice(x1, y1), buscaVertice(w, z));
         panelA.add(aristad);
@@ -128,7 +130,8 @@ public class Vista extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        btnVertice = new javax.swing.JButton();
+        contenedor1 = new javax.swing.JScrollPane();
+        input1 = new javax.swing.JTextArea();
         panelView = new javax.swing.JPanel();
         lblEstado = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -136,38 +139,37 @@ public class Vista extends javax.swing.JFrame {
         input = new javax.swing.JTextArea();
         Cargar = new javax.swing.JButton();
         btnSalir1 = new javax.swing.JButton();
+        btnVertice = new javax.swing.JButton();
+        Cargar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Menu"));
 
-        btnVertice.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/circulo.png"))); // NOI18N
-        btnVertice.setText("Visualizar");
-        btnVertice.setToolTipText("");
-        btnVertice.setFocusPainted(false);
-        btnVertice.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnVertice.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnVertice.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVerticeActionPerformed(evt);
-            }
-        });
+        input1.setColumns(20);
+        input1.setRows(5);
+        input1.setToolTipText("escriba en forma CSV y matriz las caracteristicas de los jugadores");
+        contenedor1.setViewportView(input1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(btnVertice, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(176, Short.MAX_VALUE))
+            .addGap(0, 291, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(10, 10, 10)
+                    .addComponent(contenedor1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(10, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnVertice, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(93, Short.MAX_VALUE))
+            .addGap(0, 203, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(contenedor1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         panelView.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 102, 255)));
@@ -209,6 +211,17 @@ public class Vista extends javax.swing.JFrame {
             }
         });
 
+        btnVertice.setText("Visualizar");
+        btnVertice.setToolTipText("");
+        btnVertice.setFocusPainted(false);
+        btnVertice.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnVertice.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnVertice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerticeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -217,6 +230,8 @@ public class Vista extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
+                        .addComponent(btnVertice)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnSalir1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(Cargar))
@@ -230,11 +245,20 @@ public class Vista extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(contenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Cargar)
-                    .addComponent(btnSalir1))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Cargar)
+                        .addComponent(btnSalir1))
+                    .addComponent(btnVertice))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        Cargar1.setText("Cargar");
+        Cargar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Cargar1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -243,15 +267,21 @@ public class Vista extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Cargar1)
+                        .addGap(123, 123, 123))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,7 +291,9 @@ public class Vista extends javax.swing.JFrame {
                     .addComponent(panelView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Cargar1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -321,14 +353,14 @@ public class Vista extends javax.swing.JFrame {
         for (int i = 0; i < 4; i++) {
             Vertice prueba = new Vertice("Jugador" + cont);
             if(cont==3||cont==4){
-                prueba.setX(linea1x+50);
+                prueba.setX(linea1x+22);
             }else{
             prueba.setX(linea1x);}
 
             prueba.setY(linea1y);
             prueba.setBounds(prueba.getX(), prueba.getY(), 41, 41);
             if(cont==3||cont==4){
-                prueba.setBounds(prueba.getX()+50, prueba.getY(), 41, 41);
+                prueba.setBounds(prueba.getX()+2, prueba.getY(), 41, 41);
             }
             panelView.add(prueba);
             panel.add(prueba);
@@ -461,6 +493,27 @@ public class Vista extends javax.swing.JFrame {
     }
 //GEN-LAST:event_CargarActionPerformed
 
+    private void Cargar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cargar1ActionPerformed
+        String respuesta = input1.getText();
+        String[] lineas = respuesta.split("\n");
+        String[] columna = lineas[0].split(",");
+        String [][] matrizCaracteristicas = new String[lineas.length][columna.length];
+        for (int i = 0; i < lineas.length; i++) {
+            for (int j = 0; j < columna.length; j++) {
+                matrizCaracteristicas[i][j] = lineas[i].split(",")[j];
+            }
+        }
+        //imprime la matriz de caracteristicas
+        for (int i = 0; i < matrizCaracteristicas.length; i++) {
+            for (int j = 0; j < matrizCaracteristicas[0].length; j++) {
+                System.out.print(matrizCaracteristicas[i][j] + " ");
+            }
+            System.out.println("");
+        }
+
+        
+    }//GEN-LAST:event_Cargar1ActionPerformed
+
 public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -508,10 +561,13 @@ public static void main(String args[]) {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cargar;
+    private javax.swing.JButton Cargar1;
     private javax.swing.JButton btnSalir1;
     private javax.swing.JButton btnVertice;
     private javax.swing.JScrollPane contenedor;
+    private javax.swing.JScrollPane contenedor1;
     private javax.swing.JTextArea input;
+    private javax.swing.JTextArea input1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblEstado;

@@ -14,14 +14,18 @@ public class Vertice extends javax.swing.JPanel
 
     private int pos = -1;
     private Arista arista;
-    private int x, y;
+    private int x, y,velocidad,remate,posesion;
     private String nombre;
 
     public Vertice() {
+
         this.arista = null;
         this.x = 0;
         this.y = 0;
         this.nombre = "";
+        this.velocidad=0;
+        this.remate=0;
+        this.posesion=0;
         initComponents();
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
@@ -56,6 +60,25 @@ public class Vertice extends javax.swing.JPanel
     public int getY() {
         return this.y;
     }
+    public void setVelocidad(int velocidad) {
+        this.velocidad = velocidad;
+    }
+    public int getVelocidad() {
+        return this.velocidad;
+    }
+    public void setRemate(int remate) {
+        this.remate = remate;
+    }
+    public int getRemate() {
+        return this.remate;
+    }
+    public void setPosesion(int posesion) {
+        this.posesion = posesion;
+    }
+    public int getPosesion() {
+        return this.posesion;
+    }
+
 
     public void dibuja(Graphics g) {
         Font fuenteV = getFont();

@@ -19,7 +19,7 @@ public class Jugadores extends javax.swing.JPanel {
 
         Cargar = new javax.swing.JButton();
         contenedor = new javax.swing.JScrollPane();
-        input = new javax.swing.JTextArea();
+        input2 = new javax.swing.JTextArea();
         texto = new javax.swing.JLabel();
 
         Cargar.setText("Cargar");
@@ -29,10 +29,10 @@ public class Jugadores extends javax.swing.JPanel {
             }
         });
 
-        input.setColumns(20);
-        input.setRows(5);
-        input.setToolTipText("escriba en forma CSV y matriz las caracteristicas de los jugadores");
-        contenedor.setViewportView(input);
+        input2.setColumns(20);
+        input2.setRows(5);
+        input2.setToolTipText("escriba en forma CSV y matriz las caracteristicas de los jugadores");
+        contenedor.setViewportView(input2);
 
         texto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         texto.setText("matriz de jugadores");
@@ -65,7 +65,7 @@ public class Jugadores extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarActionPerformed
-        String respuesta = input.getText();
+        String respuesta = input2.getText();
         String[] lineas = respuesta.split("\n");
         String[] columna = lineas[0].split(",");
         matrizCaracteristicas = new String[lineas.length][columna.length];
@@ -103,7 +103,7 @@ public class Jugadores extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cargar;
     private javax.swing.JScrollPane contenedor;
-    private javax.swing.JTextArea input;
+    private javax.swing.JTextArea input2;
     private javax.swing.JLabel texto;
     // End of variables declaration//GEN-END:variables
 }
