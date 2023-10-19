@@ -18,18 +18,17 @@ public class Vista extends javax.swing.JFrame {
 
     public static ArrayList<Vertice> panel = new ArrayList<>();
     public static ArrayList<Arista> panelA = new ArrayList<>();
-    public static  String [][] matrizAdyacencia = new String[11][12];
+    public static String[][] matrizAdyacencia = new String[11][12];
     static Scanner sc = new Scanner(System.in);
     //rellena la matriz de adyacencia, en la primera columna va "Jugador"+i y el resto con 1 aleatorios
-    
-    //imprime la matriz de adyacencia
 
-    public static String [][] texto_matriz(){
+    //imprime la matriz de adyacencia
+    public static String[][] texto_matriz() {
         String respuesta = sc.hasNext() ? sc.nextLine() : "";
         System.out.println(respuesta);
         String[] lineas = respuesta.split("\n");
         int columna = 12;
-        String [][] matrizRelaciones = new String[11][columna];
+        String[][] matrizRelaciones = new String[11][columna];
         for (int i = 0; i < lineas.length; i++) {
             for (int j = 0; j < columna; j++) {
                 matrizRelaciones[i][j] = lineas[i].split(",")[j];
@@ -39,9 +38,7 @@ public class Vista extends javax.swing.JFrame {
 
     }
 
-
-
-    public static int c = 0;
+    public static int c, d = 0;
     public static int cl = 0;
     public static int maxN = 11;
     public static int hack = 0;
@@ -74,10 +71,8 @@ public class Vista extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         inicializa();
-        Matriz.setEditable(false);
-        btnLinea.setEnabled(false);
-        btnAyacente.setEnabled(false);
-        btnIncidencia.setEnabled(false);
+
+
     }
 
     public void inicializa() {
@@ -94,139 +89,60 @@ public class Vista extends javax.swing.JFrame {
     }
 
     public static void linea(int x, int y, int w, int z, int peso) {
+        x1 = x;
+        y1 = y;
         h.setColor(Color.GRAY);
         if (x == w && y == z) {
-            h.drawArc(x +18+ 10, y + 5+20, 20, 30, 320, 290);
+            h.drawArc(x + 10, y + 5, 20, 30, 320, 290);
             x = x + 15;
             y = y + 20;
         } else {
-            h.drawLine(x + 20, y + 45, w + 20, z + 45);
+            h.drawLine(x + 18 + 20, y + 20 + 45, w + 20 + 18, z + 45 + 20);
             x = ((x + 20 - w + 20) / 2) + w;
             y = ((y + 45 - z + 45) / 2) + z;
         }
-        Arista aristad = new Arista(buscaVertice(x, y), buscaVertice(w, z));
+        Arista aristad = new Arista(buscaVertice(x1, y1), buscaVertice(w, z));
         panelA.add(aristad);
+        System.out.println("x:" + x1 + " y:" + y1);
+        System.out.println("w:" + w + " z:" + z);
+        System.out.println("Arista creada: " + panelA.get(d).getDestino().getNombre() + " - " + panelA.get(d).getOrigen().getNombre());
+        d++;
         h.setColor(Color.BLACK);
-        h.drawString(""+peso, x, y);
+        h.drawString("" + peso, x, y);
 //        h.drawString(nombreL.get(cl), ((x + 20 - w + 20) / 2) + w, ((y + 45 - z + 45) / 2) + z);
         if (cl == 20) {
             cl = 0;
         }
         cl++;
+
     }
 
-    public void muestraAdyacencia() {
-        matrizAdyacente = "Matriz de Adyacencia  \n\n";
-        int tNodos = panel.size();
-        int bit = 0;
-        String Nom = "";
-        matrizAdyacente += "   ";
-        matrizAdyacente += "  ";
-        for (int k = 0; k < tNodos; k++) {
-            matrizAdyacente += "  " + nombreN[k];
-        }
-        for (int k = 0; k < tNodos; k++) {
-            matrizAdyacente += "  \n";
-            for (int l = 0; l < tNodos; l++) {
-                if (MAdyacencia[k][l]) {
-                    bit = 1;
-                } else {
-                    bit = 0;
-                }
-                if (l == 0) {
-                    Nom = nombreL.get(k) + "  ";
-                } else {
-                    Nom = "";
-                }
-                matrizAdyacente += Nom + bit + "   ";
-            }
-        }
-        setMatriz(matrizAdyacente, matrizIncedencia);
-    }
 
-    public void Incidencia() {
-        matrizIncedencia = "Matriz de Incidencia  \n\n";
-        int tNodos = panel.size();
-        int bit = 0;
-        String Nom = "";
-        matrizIncedencia += "  ";
-        matrizIncedencia += "  ";
-        for (int k = 0; k < tNodos; k++) {
-            matrizIncedencia += "   " + nombreN[k];
-        }
-        for (int k = 0; k < tNodos; k++) {
-            matrizIncedencia += "   \n";
-            for (int l = 0; l < tNodos; l++) {
-                if (MIncidencia[k][l]) {
-                    bit = 0;
-                } else {
-                    bit = 1;
-                }
-                if (l == 0) {
-                    Nom = nombreL.get(k) + "  ";
-                } else {
-                    Nom = "";
-                }
-                matrizIncedencia += Nom + bit + "   ";
-            }
-        }
-        setMatriz(matrizIncedencia, matrizAdyacente);
-    }
 
-    private void setMatriz(String matriz1, String matriz2) {
-        Matriz.setText(matriz1 + "\n\n" + matriz2);
-    }
+
+
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        btnAyacente = new javax.swing.JButton();
-        btnIncidencia = new javax.swing.JButton();
-        btnSalir1 = new javax.swing.JButton();
         btnVertice = new javax.swing.JButton();
-        btnLinea = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        Matriz = new javax.swing.JTextArea();
         panelView = new javax.swing.JPanel();
         lblEstado = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        contenedor = new javax.swing.JScrollPane();
+        input = new javax.swing.JTextArea();
+        Cargar = new javax.swing.JButton();
+        btnSalir1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Menu"));
 
-        btnAyacente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/matriz.png"))); // NOI18N
-        btnAyacente.setText("Adyacencia");
-        btnAyacente.setFocusPainted(false);
-        btnAyacente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnAyacente.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnAyacente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAyacenteActionPerformed(evt);
-            }
-        });
-
-        btnIncidencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/matriz.png"))); // NOI18N
-        btnIncidencia.setText("Incidencia");
-        btnIncidencia.setFocusPainted(false);
-        btnIncidencia.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnIncidencia.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnIncidencia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIncidenciaActionPerformed(evt);
-            }
-        });
-
-        btnSalir1.setText("Salir");
-        btnSalir1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalir1ActionPerformed(evt);
-            }
-        });
-
         btnVertice.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/circulo.png"))); // NOI18N
-        btnVertice.setText("Vertice");
+        btnVertice.setText("Visualizar");
         btnVertice.setToolTipText("");
         btnVertice.setFocusPainted(false);
         btnVertice.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -237,55 +153,22 @@ public class Vista extends javax.swing.JFrame {
             }
         });
 
-        btnLinea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/linea.png"))); // NOI18N
-        btnLinea.setText("Arista");
-        btnLinea.setFocusPainted(false);
-        btnLinea.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnLinea.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnLinea.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLineaActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnSalir1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnVertice, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnLinea, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnAyacente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnIncidencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(38, 38, 38))
+                .addComponent(btnVertice, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(176, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnAyacente, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
-                    .addComponent(btnVertice, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(12, 12, 12)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnLinea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnIncidencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSalir1)
-                .addContainerGap())
+                .addComponent(btnVertice, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(93, Short.MAX_VALUE))
         );
-
-        Matriz.setColumns(20);
-        Matriz.setRows(5);
-        Matriz.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Matrizes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tempus Sans ITC", 1, 12))); // NOI18N
-        jScrollPane1.setViewportView(Matriz);
 
         panelView.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 102, 255)));
         panelView.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -298,7 +181,7 @@ public class Vista extends javax.swing.JFrame {
         panelView.setLayout(panelViewLayout);
         panelViewLayout.setHorizontalGroup(
             panelViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 696, Short.MAX_VALUE)
+            .addGap(0, 692, Short.MAX_VALUE)
         );
         panelViewLayout.setVerticalGroup(
             panelViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -307,18 +190,67 @@ public class Vista extends javax.swing.JFrame {
 
         lblEstado.setBorder(javax.swing.BorderFactory.createTitledBorder("Estado"));
 
+        input.setColumns(20);
+        input.setRows(5);
+        input.setToolTipText("escriba en forma CSV y matriz las relaciones de adyacencia de los jugadores");
+        contenedor.setViewportView(input);
+
+        Cargar.setText("Cargar");
+        Cargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CargarActionPerformed(evt);
+            }
+        });
+
+        btnSalir1.setText("Salir");
+        btnSalir1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalir1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnSalir1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Cargar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(contenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(contenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Cargar)
+                    .addComponent(btnSalir1))
+                .addContainerGap(13, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1)
-                    .addComponent(lblEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panelView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -331,48 +263,37 @@ public class Vista extends javax.swing.JFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnVerticeActionPerformed(java.awt.event.ActionEvent evt) {           //GEN-FIRST:event_btnVerticeActionPerformed
+    private void btnVerticeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerticeActionPerformed
         if (N) {
             N = false;
             L = false;
             lblEstado.setText("Vertice y Arista Desactivado");
             btnVertice.setBackground(null);
-            btnLinea.setBackground(null);
+
         } else {
             L = false;
             N = true;
             btnVertice.setBackground(Color.decode("#3F3634"));
-            btnLinea.setBackground(null);
+
             lblEstado.setText("Vertice Activo");
 //////////////////////////////////////////////////////////////////////
         }
 
         Vista.formacion433pro();
-        matriz_arista(texto_matriz());
-        for (Arista a : panelA) {
-            System.out.println("Arista");
-            if   (a.getOrigen() == null && a.getDestino() == null) {
-                panelA.remove(a);
-                System.out.println("Arista removida");
-            }
-            if (a.getOrigen() != null && a.getDestino() != null) {
-                System.out.println(a.getOrigen().getNombre()+"->"+a.getDestino().getNombre());
-            }
-            //si la arista no tiene origen ni destino sacarla de la lista
+        
 
 
-        }
     }//GEN-LAST:event_btnVerticeActionPerformed
 
-    //crea una funcion que busca el vertice en el panel en base a las coordenadas
+    // funcion que busca el vertice en el panel en base a las coordenadas
     public static Vertice buscaVertice(int x, int y) {
         Vertice v = null;
         for (int i = 0; i < panel.size(); i++) {
@@ -382,13 +303,14 @@ public class Vista extends javax.swing.JFrame {
         }
         return v;
     }
-    public static void formacion433pro(){
+
+    public static void formacion433pro() {
         int cont = 1;
         //Jugadores Equipo 1
-        Vertice ko = new Vertice("Jugador"+cont);
+        Vertice ko = new Vertice("Jugador" + cont);
         ko.setX(10);
         ko.setY(300);
-        ko.setBounds(ko.getX(),ko.getY(), 41, 41);
+        ko.setBounds(ko.getX(), ko.getY(), 41, 41);
         panelView.add(ko);
         panel.add(ko);
         ko.dibuja(ko.getGraphics());
@@ -397,10 +319,17 @@ public class Vista extends javax.swing.JFrame {
         int linea1x = 100;
         int linea1y = 150;
         for (int i = 0; i < 4; i++) {
-            Vertice prueba = new Vertice("Jugador"+cont);
-            prueba.setX(linea1x);
+            Vertice prueba = new Vertice("Jugador" + cont);
+            if(cont==3||cont==4){
+                prueba.setX(linea1x+50);
+            }else{
+            prueba.setX(linea1x);}
+
             prueba.setY(linea1y);
-            prueba.setBounds(prueba.getX(),prueba.getY(), 41, 41);
+            prueba.setBounds(prueba.getX(), prueba.getY(), 41, 41);
+            if(cont==3||cont==4){
+                prueba.setBounds(prueba.getX()+50, prueba.getY(), 41, 41);
+            }
             panelView.add(prueba);
             panel.add(prueba);
             prueba.dibuja(prueba.getGraphics());
@@ -410,17 +339,15 @@ public class Vista extends javax.swing.JFrame {
             linea1y = linea1y + 100;
         }
 
-
         int ddd = 100;
-        int  xxx = 150;
+        int xxx = 150;
         //crea una arista entre los vertices de la linea 1
-
 
         int linea2x = 350;
         int linea2y = 200;
         for (int i = 0; i < 3; i++) {
 
-            Vertice prueba = new Vertice("Jugador"+cont);
+            Vertice prueba = new Vertice("Jugador" + cont);
             prueba.setX(linea2x);
             prueba.setY(linea2y);
             prueba.setBounds(prueba.getX(), prueba.getY(), 41, 41);
@@ -431,22 +358,20 @@ public class Vista extends javax.swing.JFrame {
             linea1x = 118;
             linea1y = 170;
 
-
             linea2y = linea2y + 100;
 
         }
         ddd = 100;
         xxx = 150;
 
-         ddd = 350;
-         xxx = 200;
+        ddd = 350;
+        xxx = 200;
         //crea una arista entre los vertices de la linea 1
-
 
         int linea3x = 600;
         int linea3y = 175;
         for (int i = 0; i < 3; i++) {
-            Vertice prueba = new Vertice("Jugador"+cont);
+            Vertice prueba = new Vertice("Jugador" + cont);
             prueba.setX(linea3x);
             prueba.setY(linea3y);
             prueba.setBounds(linea3x, linea3y, 41, 41);
@@ -464,14 +389,13 @@ public class Vista extends javax.swing.JFrame {
         //crea una arista entre los vertices de la linea 1
 
         //////////////////////////////////////////////////
-
-
         for (Vertice v : panel) {
             System.out.println(v.getNombre());
-            System.out.println("X:"+v.getX()+" Y:" +v.getY());
+            System.out.println("X:" + v.getX() + " Y:" + v.getY());
         }
 
     }
+
     //crea una funcion que busque un vertice en base a su nombre
     public static Vertice buscaVertice(String nombre) {
         Vertice v = null;
@@ -483,7 +407,7 @@ public class Vista extends javax.swing.JFrame {
         return v;
     }
 
-    public static  void matriz_arista(String [][] matrizAdyacencia){
+    public static void matriz_arista(String[][] matrizAdyacencia) {
         int cont = 1;
         for (int i = 0; i < matrizAdyacencia.length; i++) {
             for (int j = 0; j < matrizAdyacencia.length; j++) {
@@ -492,51 +416,24 @@ public class Vista extends javax.swing.JFrame {
                 //se usa busca el vertice de destino con la funcion buscaVertice ingresando "Jugador"+j
                 if (Objects.equals(matrizAdyacencia[i][j], "1")) {
                     linea(buscaVertice(matrizAdyacencia[i][0]).getX(), buscaVertice(matrizAdyacencia[i][0]).getY(),
-                            buscaVertice("Jugador"+j).getX(), buscaVertice("Jugador"+j).getY(),0);
+                            buscaVertice("Jugador" + j).getX(), buscaVertice("Jugador" + j).getY(), 0);
 
                 }
             }
         }
 
-
     }
-
-    private void btnLineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLineaActionPerformed
-        if (L) {
-            L = false;
-            N = false;
-            lblEstado.setText("Vertice y Arista Desactivado");
-            btnVertice.setBackground(null);
-            btnLinea.setBackground(null);
-        } else {
-            N = false;
-            L = true;
-            btnLinea.setBackground(Color.decode("#79f966"));
-            btnVertice.setBackground(null);
-            lblEstado.setText("Arista Activo");
-        }
-    }//GEN-LAST:event_btnLineaActionPerformed
-
-    private void btnAyacenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAyacenteActionPerformed
-        muestraAdyacencia();
-    }//GEN-LAST:event_btnAyacenteActionPerformed
-
-    private void btnIncidenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncidenciaActionPerformed
-        Incidencia();
-    }//GEN-LAST:event_btnIncidenciaActionPerformed
 
     private void btnSalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalir1ActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnSalir1ActionPerformed
 
     private void panelViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelViewMouseClicked
-        if (panelView.getMousePosition() != null) {
+        /*if (panelView.getMousePosition() != null) {
             Point p = panelView.getMousePosition().getLocation();
             if (!L) {
                 if (N) {
-                    btnLinea.setEnabled(true);
-                    btnAyacente.setEnabled(true);
-                    btnIncidencia.setEnabled(true);
+                    
                     Vertice prueba = new Vertice();
                     prueba.setBounds(p.x - 15, p.y - 10, 31, 31);
                     panelView.add(prueba);
@@ -544,10 +441,27 @@ public class Vista extends javax.swing.JFrame {
                     prueba.dibuja(prueba.getGraphics());
                 }
             }
-        }
+        }*/
     }//GEN-LAST:event_panelViewMouseClicked
 
-    public static void main(String args[]) {
+    private void CargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarActionPerformed
+        String respuesta = input.getText();
+        System.out.println(respuesta);
+        String[] lineas = respuesta.split("\n");
+        int columna = 12;
+        String[][] matrizRelaciones = new String[11][columna];
+        for (int i = 0; i < lineas.length; i++) {
+            for (int j = 0; j < columna; j++) {
+                matrizRelaciones[i][j] = lineas[i].split(",")[j];
+            }
+        }
+        matriz_arista(matrizRelaciones);
+        
+       
+    }
+//GEN-LAST:event_CargarActionPerformed
+
+public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /*
@@ -560,16 +474,28 @@ public class Vista extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
+
+}
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Vista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Vista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Vista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Vista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Vista.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Vista.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Vista.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Vista.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -581,14 +507,13 @@ public class Vista extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea Matriz;
-    private javax.swing.JButton btnAyacente;
-    private javax.swing.JButton btnIncidencia;
-    private javax.swing.JButton btnLinea;
+    private javax.swing.JButton Cargar;
     private javax.swing.JButton btnSalir1;
     private javax.swing.JButton btnVertice;
+    private javax.swing.JScrollPane contenedor;
+    private javax.swing.JTextArea input;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblEstado;
     private static javax.swing.JPanel panelView;
     // End of variables declaration//GEN-END:variables
