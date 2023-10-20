@@ -2,6 +2,7 @@ package Frames;
 
 import Classes.Campo;
 import Classes.Jugador;
+import javax.swing.JOptionPane;
 import Classes.evento;
 
 public class Jugadores extends javax.swing.JPanel {
@@ -68,18 +69,24 @@ public class Jugadores extends javax.swing.JPanel {
         String respuesta = input.getText();
         String[] lineas = respuesta.split("\n");
         String[] columna = lineas[0].split(",");
-        matrizCaracteristicas = new String[lineas.length][columna.length];
-        for (int i = 0; i < lineas.length; i++) {
-            for (int j = 0; j < columna.length; j++) {
-                matrizCaracteristicas[i][j] = lineas[i].split(",")[j];
+        if (lineas.length <= 1 || columna.length <= 1){
+            input.setText("");
+            JOptionPane.showMessageDialog(null,"ha digitado un valor no esperado");
+        } else {
+            matrizCaracteristicas = new String[lineas.length][columna.length];
+            for (int i = 0; i < lineas.length; i++) {
+                for (int j = 0; j < columna.length; j++) {
+                    matrizCaracteristicas[i][j] = lineas[i].split(",")[j];
+                }
+            }
+            for (int i = 0; i < matrizCaracteristicas.length; i++) {
+                campo.addJugador(new Jugador(matrizCaracteristicas[i][0],Integer.parseInt(matrizCaracteristicas[i][1]),Integer.parseInt(matrizCaracteristicas[i][2]),Integer.parseInt(matrizCaracteristicas[i][3])));
+            }
+            if (listener != null){
+                listener.onSetCampo(this);
             }
         }
-        for (int i = 0; i < matrizCaracteristicas.length; i++) {
-            campo.addJugador(new Jugador(matrizCaracteristicas[i][0],Integer.parseInt(matrizCaracteristicas[i][1]),Integer.parseInt(matrizCaracteristicas[i][2]),Integer.parseInt(matrizCaracteristicas[i][3])));
-        }
-        if (listener != null){
-            listener.onSetCampo(this);
-        }
+        
     }//GEN-LAST:event_CargarActionPerformed
 
     public void setCampo(Campo campo) {

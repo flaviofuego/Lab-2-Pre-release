@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 public class VistaGrafo extends javax.swing.JFrame {
     private Campo campo;
     public static Graphics h;
+    private ver v = new ver();
     
     public VistaGrafo() {
         initComponents();
@@ -126,14 +127,13 @@ public class VistaGrafo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void VOLVERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VOLVERActionPerformed
-        // TODO add your handling code here:
         CampoVista c = new CampoVista();
         this.setVisible(false);
         c.setVisible(true);
-    }//GEN-LAST:event_VOLVERActionPerformed
+    }
 
     private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
-        ver v = new ver();
+        
         if(inicio.getText().isEmpty()){
             v.setBounds(5,5 ,1060 ,640 );
             v.setCampo(campo);
@@ -141,20 +141,25 @@ public class VistaGrafo extends javax.swing.JFrame {
             v.dibuja(v.getGraphics());
         } else {
             String pos =  inicio.getText();
-            String destino = JOptionPane.showInputDialog("Digite el nombre del jugador al que desea llegar");
-            ArrayList<Integer> ruta = campo.dijkstra(Integer.parseInt(pos), campo.getPosJugador(destino));
-            for (Integer r:ruta){
-                System.out.print(r + ",");
+            try {
+                int validacion = Integer.parseInt(pos);
+                JOptionPane.showMessageDialog(null,"ha digitado un valor no esperado");
+            } catch (Exception e) {
+                String destino = JOptionPane.showInputDialog("Digite el nombre del jugador al que desea llegar");
+                ArrayList<Integer> ruta = campo.dijkstra(campo.getPosJugador(pos), campo.getPosJugador(destino));
+                for (Integer r:ruta){
+                    System.out.print(r + ",");
+                }
+                v.dibuja_camino(v.getGraphics(), ruta);
             }
-            v.dibuja_camino(v.getGraphics(), ruta);
+            
         }
-        
-        
-    }//GEN-LAST:event_siguienteActionPerformed
+    }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+        this.campo.setEnfoque("velocidad");
+        v.dibuja(v.getGraphics());
+    }
 
     public void setCampo(Campo campo) {
         this.campo = campo;
