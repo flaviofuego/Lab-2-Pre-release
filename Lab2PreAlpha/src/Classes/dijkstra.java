@@ -20,8 +20,7 @@ class Edge
 }
  
 // Una clase para almacenar un nodo de heap
-class Node
-{
+class Node {
     int vertex, weight;
  
     public Node(int vertex, int weight)
@@ -32,8 +31,7 @@ class Node
 }
  
 // Una clase para representar un objeto graph
-class Graph
-{
+class Graph {
     // Una lista de listas para representar una lista de adyacencia
     List<List<Edge>> adjList = null;
  
@@ -65,7 +63,7 @@ class Dijkstra
     }
  
     // Ejecutar el algoritmo de Dijkstra en un graph dado
-    public static List<Integer> findShortestPaths(Graph graph, int source, int n, int fin)
+    public static ArrayList<Integer> findShortestPaths(Graph graph, int source, int n, int fin)
     {
         // crea un nodo de fuente min-heap y push con distancia 0
         PriorityQueue<Node> minHeap;
@@ -73,7 +71,7 @@ class Dijkstra
         minHeap.add(new Node(source, 0));
  
         // establece la distancia inicial desde la fuente a `v` como infinito
-        List<Integer> dist;
+        ArrayList<Integer> dist;
         dist = new ArrayList<>(Collections.nCopies(n, Integer.MAX_VALUE));
  
         // la distancia de la fuente a sí misma es cero
@@ -116,7 +114,7 @@ class Dijkstra
             done[u] = true;
         }
  
-        List<Integer> route = new ArrayList<>();
+        ArrayList<Integer> route = new ArrayList<>();
         getRoute(prev, fin, route);
 //        for (int i = 0; i < n; i++)
 //        {

@@ -26,7 +26,7 @@ public class Arista {
         this.enfoque = enfoque;
         if (enfoque.equalsIgnoreCase("velocidad")){
             peso = jugador1.getVelocidad();
-        } else if (enfoque.equalsIgnoreCase("habilidad")){
+        } else if (enfoque.equalsIgnoreCase("remate")){
             peso = jugador1.getHabilidad();
         } else if (enfoque.equalsIgnoreCase("posesion")){
             peso = jugador1.getPosesion();

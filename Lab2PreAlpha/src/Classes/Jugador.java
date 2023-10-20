@@ -6,12 +6,10 @@ import java.util.stream.Collectors;
 public class Jugador {
     private String nombre;
     private ArrayList<Arista> aristas;
-    private int velocidad;
-    private int habilidad;
-    private int posesion;
+    private int velocidad, habilidad, posesion;
     private int ID;
-    private Circulo circulo;
     private static int cd;
+    public int x, y;
 
     public Jugador(String nombre, int velocidad, int remate, int posesion){
         this.nombre = nombre;
@@ -19,12 +17,7 @@ public class Jugador {
         this.habilidad = remate;
         this.posesion = posesion;
         this.aristas = new ArrayList<>();
-        circulo = null;
         this.ID = cd++;
-    }
-    
-    public Circulo getCirculo() {
-        return circulo;
     }
     
     public int getID() {

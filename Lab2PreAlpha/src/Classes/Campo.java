@@ -43,7 +43,7 @@ public class Campo {
         for (int i = 0; i < matrizAdyacencia.length; i++) {
             for (int j = 0; j < matrizAdyacencia[i].length; j++) {
                 if (matrizAdyacencia[i][j] == 1) {
-                    this.addRelacion(jugadores.get(j), jugadores.get(i));
+                    this.addRelacion(jugadores.get(i), jugadores.get(j));
                 }
             }
         }
@@ -59,7 +59,7 @@ public class Campo {
         }
     }
 
-    public List<Integer> dijkstra(int inicio, int fin) {
+    public ArrayList<Integer> dijkstra(int inicio, int fin) {
         List<Edge> new_aristas = new ArrayList<>();
         for (Jugador jugador: jugadores){
             for (Arista arista: jugador.getArista()){
@@ -98,6 +98,20 @@ public class Campo {
 
     public int getBalonPosicion() {
         return balonPosicion;
+    }
+    
+    public int getPosJugador(String nombre){
+        int pos = 0;
+        int i = 0;
+        for(Jugador jugador:jugadores){
+            if (jugador.getNombre().equalsIgnoreCase(nombre)){
+                pos = i;
+                break;
+            } else {
+                i++;
+            }
+        }
+        return pos;
     }
     
     public ArrayList<Arista> getAristas(){

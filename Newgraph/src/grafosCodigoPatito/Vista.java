@@ -41,7 +41,8 @@ public class Vista extends javax.swing.JFrame {
     public static int c, d = 0;
     public static int cl = 0;
     public static int maxN = 11;
-    public static int hack = 0;
+    public static int hack,comprobar = 0;
+
     public static boolean N = false;
     public static boolean L = false;
     public static Graphics h;
@@ -91,13 +92,33 @@ public class Vista extends javax.swing.JFrame {
     public static void linea(int x, int y, int w, int z, int peso) {
         x1 = x;
         y1 = y;
+        int e = 0, f = 0;
         h.setColor(Color.GRAY);
         if (x == w && y == z) {
                 h.drawArc(x + 10, y + 5, 20, 30, 320, 290);
                 x = x + 15;
                 y = y + 20;
         } else {
-                h.drawLine(x + 18 + 20, y + 20 + 45, w + 20 + 18, z + 45 + 20);
+                e=x;
+                f=y;
+
+                //comprobar que 2 vertices no posean una arista
+                for (int i = 0; i < panelA.size(); i++) {
+                    if (panelA.get(i).getOrigen().getX() == w && panelA.get(i).getOrigen().getY() == z
+                            && panelA.get(i).getDestino().getX() == x && panelA.get(i).getDestino().getY() == y) {
+                        e = 1;
+                    }
+
+                }
+                if (e==1){
+                    h.drawLine(x + 18+20, y + 20+45, ((x + 20 - w + 20) / 2) + w, ((y + 45 - z + 45) / 2) + z-10);
+                    h.drawLine(((x + 20 - w + 20) / 2) + w, ((y + 45 - z + 45) / 2) + z-10, w + 18+20, z + 45+20);
+                }else{
+                    h.drawLine(x + 18+20, y + 20+45, ((x + 20 - w + 20) / 2) + w, ((y + 45 - z + 45) / 2) + z+30);
+                    h.drawLine(((x + 20 - w + 20) / 2) + w, ((y + 45 - z + 45) / 2) + z+30, w + 18+20, z + 45+20);
+                }
+
+                //h.drawLine(x + 18 + 20, y + 20 + 45, w + 20 + 18, z + 45 + 20);
                 x = ((x + 20 - w + 20) / 2) + w;
                 y = ((y + 45 - z + 45) / 2) + z;
 
@@ -109,7 +130,7 @@ public class Vista extends javax.swing.JFrame {
         System.out.println("w:" + w + " z:" + z);
         System.out.println("Arista creada: " + panelA.get(d).getDestino().getNombre() + " - " + panelA.get(d).getOrigen().getNombre());
         d++;
-        h.setColor(Color.BLACK);
+        h.setColor(Color.decode("#d6d9df"));
         h.drawString("" + peso, x, y);
 //        h.drawString(nombreL.get(cl), ((x + 20 - w + 20) / 2) + w, ((y + 45 - z + 45) / 2) + z);
         if (cl == 20) {

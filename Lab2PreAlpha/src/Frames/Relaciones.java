@@ -1,15 +1,14 @@
 package Frames;
 
 import Classes.Campo;
-import Classes.Jugador;
 import Classes.evento;
 
-public class Jugadores extends javax.swing.JPanel {
-    private String[][] matrizCaracteristicas;
+public class Relaciones extends javax.swing.JPanel {
+    private int[][] matrizRelaciones;
     private Campo campo;
     private evento listener;
     
-    public Jugadores() {
+    public Relaciones() {
         initComponents();
     }
     
@@ -20,7 +19,7 @@ public class Jugadores extends javax.swing.JPanel {
         Cargar = new javax.swing.JButton();
         contenedor = new javax.swing.JScrollPane();
         input = new javax.swing.JTextArea();
-        texto = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         Cargar.setText("Cargar");
         Cargar.addActionListener(new java.awt.event.ActionListener() {
@@ -31,11 +30,12 @@ public class Jugadores extends javax.swing.JPanel {
 
         input.setColumns(20);
         input.setRows(5);
-        input.setToolTipText("escriba en forma CSV y matriz las caracteristicas de los jugadores");
+        input.setToolTipText("escriba en forma CSV y matriz las relaciones de adyacencia de los jugadores");
         contenedor.setViewportView(input);
 
-        texto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        texto.setText("matriz de jugadores");
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("matriz de adyacencia");
+        jLabel1.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -46,18 +46,18 @@ public class Jugadores extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Cargar)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(contenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(texto, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(27, Short.MAX_VALUE))
+                        .addComponent(contenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(texto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(contenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(Cargar)
                 .addGap(32, 32, 32))
@@ -68,14 +68,18 @@ public class Jugadores extends javax.swing.JPanel {
         String respuesta = input.getText();
         String[] lineas = respuesta.split("\n");
         String[] columna = lineas[0].split(",");
-        matrizCaracteristicas = new String[lineas.length][columna.length];
+        matrizRelaciones = new int[lineas.length][columna.length-1];
         for (int i = 0; i < lineas.length; i++) {
-            for (int j = 0; j < columna.length; j++) {
-                matrizCaracteristicas[i][j] = lineas[i].split(",")[j];
+            for (int j = 1; j < columna.length; j++) {
+                matrizRelaciones[i][j-1] = Integer.parseInt(lineas[i].split(",")[j]);
             }
         }
-        for (int i = 0; i < matrizCaracteristicas.length; i++) {
-            campo.addJugador(new Jugador(matrizCaracteristicas[i][0],Integer.parseInt(matrizCaracteristicas[i][1]),Integer.parseInt(matrizCaracteristicas[i][2]),Integer.parseInt(matrizCaracteristicas[i][3])));
+        campo.setMatrizAdyacencia(matrizRelaciones);
+        for (int i = 0; i < lineas.length; i++) {
+            for (int j = 0; j < columna.length-1; j++) {
+                System.out.print(matrizRelaciones[i][j] + " ");
+            }
+            System.out.println("");
         }
         if (listener != null){
             listener.onSetCampo(this);
@@ -86,12 +90,12 @@ public class Jugadores extends javax.swing.JPanel {
         this.campo = campo;
     }
 
-    public String[][] getMatrizCaracteristicas() {
-        return matrizCaracteristicas;
-    }
-    
     public void setListener(evento listener) {
         this.listener = listener;
+    }
+ 
+    public int[][] getMatrizRelaciones() {
+        return matrizRelaciones;
     }
 
     public Campo getCampo() {
@@ -104,6 +108,6 @@ public class Jugadores extends javax.swing.JPanel {
     private javax.swing.JButton Cargar;
     private javax.swing.JScrollPane contenedor;
     private javax.swing.JTextArea input;
-    private javax.swing.JLabel texto;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

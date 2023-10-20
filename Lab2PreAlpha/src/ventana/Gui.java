@@ -12,17 +12,11 @@ import javax.swing.JOptionPane;
 import objetos.*;
 import operaciones.Disjktra;
 
-/**
- *
- * @author Jcarlosad7
- */
 public class Gui extends javax.swing.JFrame {
     Grafo grafo = new Grafo();
     Nodo nodoInicio = null;
     Nodo nodoFin = null;
-    /**
-     * Creamos el form
-     */
+    
     public Gui() {
         initComponents();
     }
