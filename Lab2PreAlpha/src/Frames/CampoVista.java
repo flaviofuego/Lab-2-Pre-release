@@ -39,6 +39,10 @@ public class CampoVista extends javax.swing.JFrame implements evento {
         VOLVER1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(137, 162, 162));
+
+        Panel_Fondo.setBackground(new java.awt.Color(137, 162, 162));
+        Panel_Fondo.setForeground(new java.awt.Color(137, 162, 162));
 
         mostrar.setText("Ver campo");
         mostrar.addActionListener(new java.awt.event.ActionListener() {
@@ -46,6 +50,9 @@ public class CampoVista extends javax.swing.JFrame implements evento {
                 mostrarActionPerformed(evt);
             }
         });
+
+        modo.setBackground(new java.awt.Color(137, 162, 162));
+        modo.setForeground(new java.awt.Color(137, 162, 162));
 
         javax.swing.GroupLayout modoLayout = new javax.swing.GroupLayout(modo);
         modo.setLayout(modoLayout);
@@ -55,7 +62,7 @@ public class CampoVista extends javax.swing.JFrame implements evento {
         );
         modoLayout.setVerticalGroup(
             modoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 281, Short.MAX_VALUE)
+            .addGap(0, 304, Short.MAX_VALUE)
         );
 
         VOLVER1.setText("Volver");
@@ -71,7 +78,7 @@ public class CampoVista extends javax.swing.JFrame implements evento {
             Panel_FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Panel_FondoLayout.createSequentialGroup()
                 .addContainerGap(17, Short.MAX_VALUE)
-                .addComponent(modo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(modo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(15, 15, 15))
             .addGroup(Panel_FondoLayout.createSequentialGroup()
                 .addGap(49, 49, 49)
@@ -87,8 +94,8 @@ public class CampoVista extends javax.swing.JFrame implements evento {
             Panel_FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_FondoLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(modo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addComponent(modo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(mostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
             .addGroup(Panel_FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

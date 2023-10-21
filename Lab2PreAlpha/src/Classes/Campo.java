@@ -101,7 +101,7 @@ public class Campo {
     }
     
     public int getPosJugador(String nombre){
-        int pos = 0;
+        int pos = -1;
         int i = 0;
         for(Jugador jugador:jugadores){
             if (jugador.getNombre().equalsIgnoreCase(nombre)){

@@ -11,7 +11,6 @@ import java.util.ArrayList;
 public class ver extends javax.swing.JPanel {
 
     private Campo campo;
-    private final int[][] pos = { { 50, 150 }, { 130 * 2, 20 }, { 170 * 2, 20 }, { 250 * 2, 20 } };
 
     public ver() {
         initComponents();
@@ -22,127 +21,129 @@ public class ver extends javax.swing.JPanel {
     }
 
     protected void dibuja_camino(Graphics g, ArrayList<Integer> lista) {
-        ArrayList<Arista> aristas = new ArrayList();
+        ArrayList<Jugador> jugadores = new ArrayList<>();
         for (int i = 0; i < lista.size(); i++) {
-            for (Arista arista : campo.getJugadores().get(i).getArista()) {
-                if (arista.getJugador2().getNombre().equalsIgnoreCase(campo.getJugadores().get(i + 1).getNombre())) {
+            jugadores.add(campo.getJugadores().get(lista.get(i)));
+        }
+
+        ArrayList<Arista> aristas = new ArrayList();
+        for (int i = 0; i < jugadores.size()-1; i++) {
+            for(Arista arista: jugadores.get(i).getArista()){
+                if(arista.getJugador2().equals(jugadores.get(i + 1))){
                     aristas.add(arista);
                 }
             }
         }
 
+        int couuunter = 1;
         for (Arista arista : aristas) {
-            g.setColor(Color.RED);
+            g.setColor(Color.BLACK);
 
             Jugador nodo1 = arista.getJugador1();
             Jugador nodo2 = arista.getJugador2();
-
-            // g.drawLine(nodo1.x, nodo1.y, nodo2.x/2+ 50, nodo2.y/2 + 50);
-            // g.drawLine(nodo2.x/2+ 50, nodo2.y/2 + 50, nodo2.x/2+ 50, nodo2.y/2 + 50);
-            g.drawLine(nodo1.x, nodo1.y, nodo2.x, nodo2.y);
-
-            // Dibuja el valor de la arista
-            g.setColor(Color.RED);
+            int x = nodo1.x;
+            int y = nodo1.y;
+            int w = nodo2.x;
+            int z = nodo2.y;
+            
             int valorX = (nodo1.x + nodo2.x) / 2;
             int valorY = (nodo1.y + nodo2.y) / 2;
-            g.drawString(String.valueOf(arista.getPeso()), valorX, valorY);
-        }
-    }
-    public Arista buscarArista(int x1, int y1, int x2, int y2){
-            for(Arista arista : campo.getAristas()){
-                if(arista.getJugador1().x == x1 && arista.getJugador1().y == y1 && arista.getJugador2().x == x2 && arista.getJugador2().y == y2){
-                    return arista;
+            if (x == w && y == z) {
+                g.drawArc(x + 10, y + 5, 20, 30, 320, 290);
+                x = x + 15;
+                y = y + 20;
+                couuunter++;
+            } else {
+                if (x == w) {
+
+                    g.setColor(Color.RED);
+                    g.drawLine(x, y, ((x - w) / 2) + w - 10, ((y - z) / 2) + z - 10);
+                    g.drawLine(((x - w) / 2) + w - 10, ((y - z) / 2) + z - 10, w, z);
+                    g.setColor(Color.RED);
+                    g.drawString(String.valueOf(arista.getPeso()), valorX, valorY);
+                    int x2 = w;
+                    int y2 = z;
+                    g.setColor(Color.RED);
+
+                    g.drawLine(x2, y2, ((x2 - x) / 2) + x + 10, ((y2 - y) / 2) + y + 10);
+                    g.drawLine(((x2 - x) / 2) + x + 10, ((y2 - y) / 2) + y + 10, x, y);
+
+                    g.setColor(Color.RED);
+                    g.drawString(String.valueOf(arista.getPeso()), valorX, valorY);
+
+                    couuunter++;
+                } else {
+
+                    g.setColor(Color.RED);
+                    g.drawLine(x, y, ((x - w) / 2) + w, ((y - z) / 2) + z - 10);
+                    g.drawLine(((x - w) / 2) + w, ((y - z) / 2) + z - 10, w, z);
+                    g.setColor(Color.RED);
+                    g.drawString(String.valueOf(arista.getPeso()), valorX, valorY);
+                    int x2 = w;
+                    int y2 = z;
+                    g.setColor(Color.RED);
+                    g.drawLine(x2, y2, ((x2 - x) / 2) + x, ((y2 - y) / 2) + y + 10);
+                    g.drawLine(((x2 - x) / 2) + x, ((y2 - y) / 2) + y + 10, x, y);
+
+                    g.setColor(Color.RED);
+                    g.drawString(String.valueOf(arista.getPeso()), valorX, valorY);
+                    couuunter++;
                 }
             }
-            return null;
         }
+    }
+
+    public Arista buscarArista(int x1, int y1, int x2, int y2) {
+        for (Arista arista : campo.getAristas()) {
+            if (arista.getJugador1().x == x1 && arista.getJugador1().y == y1 && arista.getJugador2().x == x2 && arista.getJugador2().y == y2) {
+                return arista;
+            }
+        }
+        return null;
+    }
+
     protected void dibuja(Graphics g) {
         super.paintComponent(g);
-        int[] posisiones = { 1, 4, 4, 3 };
-        int cantidad = 1;
-        int nivel = 0;
         int iterador = 1;
-
         for (Jugador nodo : campo.getJugadores()) {
-            /*
-             * if (cantidad < posisiones[nivel]) {
-             * if (cantidad == 0) {
-             * nodo.x = pos[nivel][0];
-             * nodo.y = pos[nivel][1];
-             * } else {
-             * nodo.x = pos[nivel][0] * 2;
-             * nodo.y = pos[nivel][1] * cantidad * 6;
-             * }
-             * cantidad++;
-             * } else {
-             * nivel++;
-             * nodo.x = pos[nivel][0];
-             * nodo.y = pos[nivel][1] * iterador;
-             * iterador++;
-             * cantidad = 1;
-             * }
-             */
-            //Jugador1
-                /*X:10 Y:300
-                Jugador2
-                X:100 Y:150
-                Jugador3
-                X:122 Y:250
-                Jugador4
-                X:122 Y:350
-                Jugador5
-                X:100 Y:450
-                Jugador6
-                X:350 Y:200
-                Jugador7
-                X:350 Y:300
-                Jugador8
-                X:350 Y:400
-                Jugador9
-                X:600 Y:175
-                Jugador10
-                X:600 Y:300
-                Jugador11
-                X:600 Y:425*/
-             if(iterador == 1){
-                 nodo.x = 60;
-                 nodo.y = 300;
-                }else if(iterador == 2){
-                    nodo.x = 300;
-                    nodo.y = 150;
-                }else if(iterador == 3){
-                    nodo.x = 450;
-                    nodo.y = 250;
-                }else if(iterador == 4){
-                    nodo.x = 450;
-                    nodo.y = 350;
-                }else if(iterador == 5){
-                    nodo.x = 300;
-                    nodo.y = 450;
-                }else if(iterador == 6){
-                    nodo.x = 650;
-                    nodo.y = 200;
-                }else if(iterador == 7){
-                    nodo.x = 650;
-                    nodo.y = 300;
-                }else if(iterador == 8){
-                    nodo.x = 650;
-                    nodo.y = 400;
-                }else if(iterador == 9){
-                    nodo.x = 950;
-                    nodo.y = 175;
-                }else if(iterador == 10){
-                    nodo.x = 950;
-                    nodo.y = 300;
-                }else if(iterador == 11){
-                    nodo.x = 950;
-                    nodo.y = 425;
-                }
-             iterador++;
+            if (iterador == 1) {
+                nodo.x = 60;
+                nodo.y = 300;
+            } else if (iterador == 2) {
+                nodo.x = 300;
+                nodo.y = 150;
+            } else if (iterador == 3) {
+                nodo.x = 450;
+                nodo.y = 250;
+            } else if (iterador == 4) {
+                nodo.x = 450;
+                nodo.y = 350;
+            } else if (iterador == 5) {
+                nodo.x = 300;
+                nodo.y = 450;
+            } else if (iterador == 6) {
+                nodo.x = 650;
+                nodo.y = 200;
+            } else if (iterador == 7) {
+                nodo.x = 650;
+                nodo.y = 300;
+            } else if (iterador == 8) {
+                nodo.x = 650;
+                nodo.y = 400;
+            } else if (iterador == 9) {
+                nodo.x = 950;
+                nodo.y = 175;
+            } else if (iterador == 10) {
+                nodo.x = 950;
+                nodo.y = 300;
+            } else if (iterador == 11) {
+                nodo.x = 950;
+                nodo.y = 425;
+            }
+            iterador++;
             System.out.println(nodo.x + ", " + nodo.y);
         }
         //crea una funcion buscar arista por coordenadas
-        
 
         ArrayList<Arista> aristaauxiliar = new ArrayList();
 
@@ -157,7 +158,7 @@ public class ver extends javax.swing.JPanel {
 
             //comprobar que la arista no esta en la lista auxiliar
             if (!aristaauxiliar.contains(buscarArista(w, z, x, y))) {
-                aristaauxiliar.add(buscarArista(x, y,w, z));
+                aristaauxiliar.add(buscarArista(x, y, w, z));
             }
 
         }
@@ -171,12 +172,6 @@ public class ver extends javax.swing.JPanel {
             int y = nodo1.y;
             int w = nodo2.x;
             int z = nodo2.y;
-            /*System.out.println("Arista:1");
-            System.out.println("x:" + x + " y:" + y);
-            System.out.println("w:" + w + " z:" + z);
-            System.out.println("arista:" + 2);
-            System.out.println("x:" + buscarArista(w, z,x, y).getJugador1().x + " y:" + buscarArista(w, z,x, y).getJugador1().y);
-            System.out.println("w:" + buscarArista(w, z,x, y).getJugador2().x + " z:" + buscarArista(w, z,x, y).getJugador2().y);*/
             if (x == w && y == z) {
                 System.out.println("ARISTA:" + couuunter);
                 g.drawArc(x + 10, y + 5, 20, 30, 320, 290);
@@ -184,48 +179,46 @@ public class ver extends javax.swing.JPanel {
                 y = y + 20;
                 couuunter++;
             } else {
-                if (x==w) {
+                if (x == w) {
 
                     g.setColor(Color.BLACK);
                     System.out.println("ARISTA:" + couuunter);
-                    g.drawLine(x, y, ((x - w) / 2) + w-10, ((y - z) / 2) + z - 10);
-                    g.drawLine(((x - w) / 2) + w-10, ((y - z) / 2) + z - 10, w, z);
+                    g.drawLine(x, y, ((x - w) / 2) + w - 10, ((y - z) / 2) + z - 10);
+                    g.drawLine(((x - w) / 2) + w - 10, ((y - z) / 2) + z - 10, w, z);
                     g.setColor(Color.decode("#3BCE1E"));
-                    g.drawString(String.valueOf(arista.getPeso()), ((x - w) / 2) + w-25, ((y - z) / 2) + z - 20);
+                    g.drawString(String.valueOf(arista.getPeso()), ((x - w) / 2) + w - 25, ((y - z) / 2) + z - 20);
                     int x2 = w;
                     int y2 = z;
                     g.setColor(Color.BLACK);
 
-                    g.drawLine(x2, y2, ((x2 - x) / 2) + x+10, ((y2 - y) / 2) + y + 10);
-                    g.drawLine(((x2 - x) / 2) + x+10, ((y2 - y) / 2) + y + 10, x, y);
+                    g.drawLine(x2, y2, ((x2 - x) / 2) + x + 10, ((y2 - y) / 2) + y + 10);
+                    g.drawLine(((x2 - x) / 2) + x + 10, ((y2 - y) / 2) + y + 10, x, y);
 
                     g.setColor(Color.decode("#C256FC"));
-                    g.drawString(String.valueOf(buscarArista(w, z, x, y).getPeso()), ((x2 - x) / 2) + x+15, ((y2 - y) / 2) + y + 20);
-
+                    g.drawString(String.valueOf(buscarArista(w, z, x, y).getPeso()), ((x2 - x) / 2) + x + 15, ((y2 - y) / 2) + y + 20);
 
                     // h.drawLine(x + 18 + 20, y + 20 + 45, w + 20 + 18, z + 45 + 20);
                     couuunter++;
                 } else {
 
-                g.setColor(Color.BLACK);
-                System.out.println("ARISTA:" + couuunter);
-                g.drawLine(x, y, ((x - w) / 2) + w, ((y - z) / 2) + z - 10);
-                g.drawLine(((x - w) / 2) + w, ((y - z) / 2) + z - 10, w, z);
-                g.setColor(Color.decode("#3BCE1E"));
-                g.drawString(String.valueOf(arista.getPeso()), ((x - w) / 2) + w, ((y - z) / 2) + z - 20);
-                int x2 = w;
-                int y2 = z;
-                g.setColor(Color.BLACK);
-                g.drawLine(x2, y2, ((x2 - x) / 2) + x, ((y2 - y) / 2) + y + 10);
-                g.drawLine(((x2 - x) / 2) + x, ((y2 - y) / 2) + y + 10, x, y);
+                    g.setColor(Color.BLACK);
+                    System.out.println("ARISTA:" + couuunter);
+                    g.drawLine(x, y, ((x - w) / 2) + w, ((y - z) / 2) + z - 10);
+                    g.drawLine(((x - w) / 2) + w, ((y - z) / 2) + z - 10, w, z);
+                    g.setColor(Color.decode("#3BCE1E"));
+                    g.drawString(String.valueOf(arista.getPeso()), ((x - w) / 2) + w, ((y - z) / 2) + z - 20);
+                    int x2 = w;
+                    int y2 = z;
+                    g.setColor(Color.BLACK);
+                    g.drawLine(x2, y2, ((x2 - x) / 2) + x, ((y2 - y) / 2) + y + 10);
+                    g.drawLine(((x2 - x) / 2) + x, ((y2 - y) / 2) + y + 10, x, y);
 
                     g.setColor(Color.decode("#C256FC"));
-                g.drawString(String.valueOf(buscarArista(w, z, x, y).getPeso()), ((x2 - x) / 2) + x, ((y2 - y) / 2) + y + 20);
+                    g.drawString(String.valueOf(buscarArista(w, z, x, y).getPeso()), ((x2 - x) / 2) + x, ((y2 - y) / 2) + y + 20);
 
-
-                // h.drawLine(x + 18 + 20, y + 20 + 45, w + 20 + 18, z + 45 + 20);
-                couuunter++;
-            }
+                    // h.drawLine(x + 18 + 20, y + 20 + 45, w + 20 + 18, z + 45 + 20);
+                    couuunter++;
+                }
             }
 
         }

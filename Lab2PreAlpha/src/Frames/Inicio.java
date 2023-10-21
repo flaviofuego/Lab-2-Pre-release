@@ -19,9 +19,14 @@ public class Inicio extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Titulo.setText("TITULO");
+        Fondo.setBackground(new java.awt.Color(137, 162, 162));
+        Fondo.setForeground(new java.awt.Color(137, 162, 162));
 
+        Titulo.setForeground(new java.awt.Color(0, 0, 0));
+        Titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Titulo.setText("GRAPHBOL");
+
+        Salir.setForeground(new java.awt.Color(0, 0, 0));
         Salir.setText("Salir");
         Salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -29,6 +34,7 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
+        comenzar.setForeground(new java.awt.Color(0, 0, 0));
         comenzar.setText("COMENZAR");
         comenzar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -36,6 +42,7 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
+        opciones.setForeground(new java.awt.Color(0, 0, 0));
         opciones.setText("OPCIONES");
         opciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
